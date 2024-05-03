@@ -8,7 +8,7 @@ use App\Http\Controllers\PersonnelController;
 
 
 Route::get('/accueil', function () {
-    return view('layouts.app');
+    return view('layouts.main');
 })->name('accueil');
 
 Route::get('/absences/{id}', [PersonnelController::class, 'showpersonnelabsence'])->name('show');
