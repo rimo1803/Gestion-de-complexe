@@ -2,7 +2,9 @@
 
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AbsencesController;
 use App\Http\Controllers\PersonnelController;
+
 use App\Http\Controllers\CongeController;
 
 use App\Http\Controllers\AuthController;
@@ -29,5 +31,17 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/create-user', [PersonnelController::class, 'create'])->name('personnels.create');
     Route::post('/create-user', [PersonnelController::class, 'store'])->name('personnels.store');
 });
+
+
+
+
+
+
+Route::get('/accueil', function () {
+    return view('layouts.main');
+})->name('accueil');
+
+Route::get('/absences/{id}', [PersonnelController::class, 'showpersonnelabsence'])->name('show');
+
 
 

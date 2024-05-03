@@ -4,6 +4,7 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\abscence;
 
 use Illuminate\Notifications\Notifiable;
 
@@ -40,16 +41,11 @@ public function setPhotoProfilAttribute($value)
             return asset('storage/' . $value);
         }
         return null;
+
     }
 
     public function organismes()
-    {
-        return $this->belongsToMany(Organisme::class, 'organisme_personnel', 'personnel_id', 'organisme_id');
-    }
-        // Mutator pour stocker le mot de passe crypté
-        public function setPasswordAttribute($value)
-        {
-            $this->attributes['password'] = bcrypt($value);
-        }
-
+{
+    return $this->belongsToMany(Organisme::class, 'organisme_personnel', 'personnel_id', 'organisme_id');
+}
 }

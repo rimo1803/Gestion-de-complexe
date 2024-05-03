@@ -2,6 +2,9 @@
 
 use App\Models\Personnel;
 
+use App\Models\Profile;
+
+
 return [
 
     /*
@@ -71,6 +74,7 @@ return [
              'driver' => 'eloquent',
              'table' => 'personnels',
              'model' => Personnel::class
+
          ],
     ],
 

@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Personnel;
+
+
+
+use App\Models\personnel;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class PersonnelController extends Controller
 {
+
     public function create()
     {
         return view('personnels.create');
@@ -59,4 +64,15 @@ class PersonnelController extends Controller
             return back()->withInput()->withErrors(['error' => 'Une erreur est survenue lors de la création du personnel. Veuillez réessayer.']);
         }
     }
+
+
+    public function showpersonnelabsence($id)
+    {
+        $personnels = personnel::findOrFail($id);
+        $absences = $personnels->absences;
+
+        return view('Accueil_personnel.abscence', compact('personnels', 'absences'));
+    }
+
+
 }

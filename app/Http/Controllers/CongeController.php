@@ -8,7 +8,6 @@ use App\Models\Conge;
 
 class CongeController extends Controller
 {
-
     public function creation()
         {
             return view('demande-conge');
