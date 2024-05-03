@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('immat')->unique();
             $table->string('Nomper');
             $table->string('prenomper');
+            $table->string('email');
+            $table->string('password');
             $table->date('date_naissance');
             $table->string('photo_profil')->nullable();
             $table->string('grade',1);
@@ -25,8 +27,9 @@ return new class extends Migration
             $table->string('lieu_naissance');
             $table->timestamps();
 
-            $table->unsignedBigInteger('fonction_id');
-            $table->foreign('fonction_id')->references('id')->on('fonctions');
+            $table->unsignedBigInteger('fonction_id')->nullable();
+            $table->foreign('fonction_id')->references('id')->on('fonctions')->onDelete('set null');
+
         });
     }
 
