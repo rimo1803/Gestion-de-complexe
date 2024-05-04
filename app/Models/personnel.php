@@ -21,8 +21,5 @@ class personnel extends Model
     return $this->belongsToMany(Organisme::class, 'organisme_personnel', 'personnel_id', 'organisme_id');
 }
 
-    public function absences()
-        {
-            return $this->hasMany(abscence::class, 'immat_per', 'immat');
-        }
+
 }
