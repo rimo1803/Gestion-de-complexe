@@ -23,9 +23,12 @@ Route::post('/login', [AuthController::class, 'login']);
 
 
 // Route pour afficher le formulaire de demande de congé
-Route::get('/demande-conge', [CongeController::class, 'creation'])->name('demande-conge');
-    // Route pour traiter la suppression d'une demande de congé
-Route::delete('/demande-conge/{id}', [CongeController::class, 'delete'])->name('conge.delete');
+
+Route::get('/demande-conge', [CongeController::class, 'creation'])->name('demande.conge');
+Route::post('/demande-conge', [CongeController::class, 'demanderConge'])->name('demande.conge.submit');
+Route::delete('/demande-conge/{id}', [CongeController::class, 'supprimerDemandeConge'])->name('demande.conge.supprimer');
+Route::put('/demande-conge/{id}/valider', [CongeController::class, 'validerDemandeConge'])->name('demande.conge.valider');
+Route::put('/demande-conge/{id}/refuser', [CongeController::class, 'refuserDemandeConge'])->name('demande.conge.refuser');
 
 Route::group(['middleware' => 'web'], function () {
     Route::get('/create-user', [PersonnelController::class, 'create'])->name('personnels.create');

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 
 use App\Models\Conge;
@@ -10,40 +11,53 @@ class CongeController extends Controller
 {
     public function creation()
         {
-            return view('demande-conge');
+            return view('Accueil_personnel.demande-conge');
+
         }
-    public function create(Request $request)
+        public function demanderConge(Request $request)
     {
-
-
-        // Validation des données du formulaire
         $request->validate([
-            'date_debut' => ['required', 'date'],
-            'date_fin' => ['required', 'date'],
-            'remplacement' => ['required', 'string'],
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date',
         ]);
 
-        // Créer la demande de congé
+        $dateDebut = Carbon::parse($request->date_debut);
+        $dateFin = Carbon::parse($request->date_fin);
+
         $conge = new Conge();
-        $conge->date_debut = $request->date_debut;
-        $conge->date_fin = $request->date_fin;
-        $conge->remplacement = $request->remplacement;
+        $conge->date_debut = $dateDebut;
+        $conge->date_fin = $dateFin;
+        $conge->descision_conje = 'En attente';
+        $conge->remplacement = 'En attente';
+        $conge->redicat = $dateFin->diffInDays(Carbon::now()); // Calcul du nombre de jours restants
         $conge->immat_per = Auth::user()->immat;
         $conge->save();
 
-        return redirect()->back()->with('message', 'Demande de congé envoyée avec succès.');
+        return redirect()->back()->with('success', 'Demande de congé envoyée avec succès.');
     }
 
-    public function delete($id)
-    {
-        // Vérifier si la demande de congé appartient à l'utilisateur connecté
-        $conge = Conge::find($id);
-        if ($conge && $conge->immat_per === Auth::user()->immat) {
-            $conge->delete();
-            return redirect()->back()->with('message', 'Demande de congé supprimée avec succès.');
-        }
 
-        return redirect()->back()->with('error', 'Vous n\'êtes pas autorisé à supprimer cette demande de congé.');
-    }
+        public function validerDemandeConge($id)
+{
+    $conge = Conge::findOrFail($id);
+    $conge->decision_conje = 'Validé'; // Mettre à jour la décision du congé
+    $conge->save();
+
+    // Envoyer le document de décision au formateur par email ou autre méthode
+
+    return redirect()->back()->with('success', 'Demande de congé validée avec succès.');
 }
+
+public function refuserDemandeConge($id)
+{
+    $conge = Conge::findOrFail($id);
+    $conge->decision_conge = 'Refusé'; // Mettre à jour la décision du congé
+    $conge->save();
+
+    // Envoyer le document de décision au formateur par email ou autre méthode
+
+    return redirect()->back()->with('success', 'Demande de congé refusée avec succès.');
+}
+
+    }
 

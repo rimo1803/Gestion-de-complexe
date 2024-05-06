@@ -15,7 +15,8 @@ class PersonnelController extends Controller
 
     public function create()
     {
-        return view('personnels.create');
+        return view('Accueil_personnel.create');
+
     }
 
     public function store(Request $request)
