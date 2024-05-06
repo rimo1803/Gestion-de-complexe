@@ -35,16 +35,17 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/create-user', [PersonnelController::class, 'store'])->name('personnels.store');
 });
 
-
-
-
-
-
 Route::get('/accueil', function () {
-    return view('layouts.main');
+    return view('layouts.mainuser');
 })->name('accueil');
-
+Route::get('/accueildire', function () {
+    return view('layouts.mainadmin');
+})->name('accueildire');
 Route::get('/absences/{id}', [PersonnelController::class, 'showpersonnelabsence'])->name('show');
 
+
+Route::get('/profile', function () {
+    return view('Accueil_personnel.profile');
+})->name('profile');
 
 
