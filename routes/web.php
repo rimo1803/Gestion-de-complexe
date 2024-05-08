@@ -44,7 +44,6 @@ Route::get('/accueildire', function () {
 })->name('accueildire');
 Route::get('/absences/{id}', [PersonnelController::class, 'showpersonnelabsence'])->name('show');
 
-
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
 
 

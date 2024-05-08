@@ -47,9 +47,9 @@
 </head>
 <body>
     <div class="container">
-        <h1>Profil de {{ $user->name }}</h1>
-        <p><strong>Nom:</strong> {{ $user->name }}</p>
-        <p><strong>Email:</strong> {{ $user->email }}</p>
+        <h1>Profil de {{ $personnel->name }}</h1>
+        <p><strong>Nom:</strong> {{ $personnel->name }}</p>
+        <p><strong>Email:</strong> {{ $personnel->email }}</p>
     </div>
 </body>
 </html>

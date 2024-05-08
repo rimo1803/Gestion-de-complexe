@@ -78,7 +78,7 @@ class PersonnelController extends Controller
     public function showProfile()
     {
         $user = auth()->user(); // Récupère l'utilisateur authentifié
-        $personnel = $user->personnel; // Récupère les informations personnelles de l'utilisateur
+        $personnel = Personnel::where('email', $user->email)->first(); // Récupère les informations personnelles de l'utilisateur
         return view('profile.show', compact('user', 'personnel'));
     }
 
