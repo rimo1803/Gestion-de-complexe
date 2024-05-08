@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.mainadmin')
 
 @section('content')
     <div class="container">
@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">Demande de Congé</div>
                     <div class="card-body">
-                        <p>Nom : {{ Auth::user()->nomper }}</p>
+                        <p>Nom : {{ Auth::user()->Nomper }}</p>
                         <p>Prénom : {{ Auth::user()->prenomper }}</p>
                         <p>Email : {{ Auth::user()->email }}</p>
                         <p>CIN : {{ Auth::user()->CIN }}</p>

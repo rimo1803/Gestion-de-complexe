@@ -16,10 +16,10 @@ class PersonnelController extends Controller
 
     public function create()
     {
-        return view('Accueil_personnel.create');
+        return view('Accueil_directeur.create');
 
     }
-
+// fonction store
     public function store(Request $request)
     {
         $request->validate([

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gestion_Personnels</title>
+    <title>blog</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
