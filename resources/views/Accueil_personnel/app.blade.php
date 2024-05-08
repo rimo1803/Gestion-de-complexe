@@ -1,4 +1,4 @@
-<!-- resources/views/app.blade.php -->
+
 
 <!DOCTYPE html>
 <html lang="en">
