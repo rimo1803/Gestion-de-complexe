@@ -53,4 +53,8 @@ public function setPhotoProfilAttribute($value)
         {
             return $this->hasMany(abscence::class, 'immat_per', 'immat');
         }
+    public function personnel()
+        {
+            return $this->hasOne(Personnel::class)->where('id', $this->id);
+        }
 }

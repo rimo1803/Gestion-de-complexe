@@ -18,6 +18,12 @@ class PersonnelFactory extends Factory
     {
         return [
             //
+            'name'=>$this->faker->name(),
+            'email'=>$this->faker->email(),
+            'phone'=>$this->faker->phoneNumber(),
+            'role'=>$this->faker->randomElement(['admin','personnel']),
+            'password'=>bcrypt('password'),
+            
         ];
     }
 }

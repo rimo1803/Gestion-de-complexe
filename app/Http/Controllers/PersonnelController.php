@@ -9,6 +9,7 @@ use App\Models\personnel;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class PersonnelController extends Controller
 {
@@ -66,7 +67,6 @@ class PersonnelController extends Controller
         }
     }
 
-
     public function showpersonnelabsence($id)
     {
         $personnels = personnel::findOrFail($id);
@@ -75,5 +75,11 @@ class PersonnelController extends Controller
         return view('Accueil_personnel.abscence', compact('personnels', 'absences'));
     }
 
+    public function showProfile()
+    {
+        $user = auth()->user(); // Récupère l'utilisateur authentifié
+        $personnel = $user->personnel; // Récupère les informations personnelles de l'utilisateur
+        return view('profile.show', compact('user', 'personnel'));
+    }
 
 }

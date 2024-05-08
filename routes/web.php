@@ -2,12 +2,13 @@
 
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AbsencesController;
-use App\Http\Controllers\PersonnelController;
-
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CongeController;
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
+
+use App\Http\Controllers\AbsencesController;
+use App\Http\Controllers\PersonnelController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,8 +45,7 @@ Route::get('/accueildire', function () {
 Route::get('/absences/{id}', [PersonnelController::class, 'showpersonnelabsence'])->name('show');
 
 
-Route::get('/profile', function () {
-    return view('Accueil_personnel.profile');
-})->name('profile');
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+
 
 
