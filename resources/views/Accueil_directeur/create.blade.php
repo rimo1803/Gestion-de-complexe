@@ -69,11 +69,15 @@
     </style>
 </head>
 <body>
-
-<div class="container">
-    <h1>Créer un utilisateur</h1>
-    <form method="POST" action="{{ route('personnels.store') }}" enctype="multipart/form-data">
-        @csrf
+    <div class="container">
+        <h1>Créer un utilisateur</h1>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        <form method="POST" action="{{ route('personnels.store') }}" enctype="multipart/form-data">
+            @csrf
         <div class="form-group">
             <label for="Nomper">Nomper:</label>
             <input type="text" name="Nomper" id="Nomper" value="{{ old('Nomper') }}" required>
@@ -161,20 +165,14 @@
         <button type="submit">Créer Utilisateur</button>
     </form>
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 </div>
 </body>
 </html>
