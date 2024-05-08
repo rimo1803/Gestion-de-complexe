@@ -19,7 +19,7 @@ class PersonnelController extends Controller
         return view('Accueil_directeur.create');
 
     }
-
+// fonction store
     public function store(Request $request)
     {
         $request->validate([
