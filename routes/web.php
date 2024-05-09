@@ -43,7 +43,7 @@ Route::get('/accueildire', function () {
     return view('layouts.mainadmin');
 })->name('accueildire');
 Route::get('/absences/{id}', [PersonnelController::class, 'showpersonnelabsence'])->name('show');
-
+Route::get('/liste', [PersonnelController::class, 'index'])->name('showliste');
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
 
 

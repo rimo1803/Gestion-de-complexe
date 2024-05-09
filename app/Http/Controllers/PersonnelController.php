@@ -81,5 +81,9 @@ class PersonnelController extends Controller
         $personnel = Personnel::where('email', $user->email)->first(); // Récupère les informations personnelles de l'utilisateur
         return view('profile.show', compact('user', 'personnel'));
     }
-
+    //Affichage la liste des personnels
+    public function index(){
+        $personnels = personnel::orderBy('date_affectation')->get();;
+        return view('Accueil_directeur.index',compact('personnels'));
+    }
 }

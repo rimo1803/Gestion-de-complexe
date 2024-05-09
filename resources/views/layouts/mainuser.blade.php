@@ -32,7 +32,6 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="{{ asset('dist/img/logo.png') }}" alt="logo" height="200"
@@ -58,8 +57,6 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
-
-
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
@@ -172,7 +169,6 @@
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">HR - Innovations</span>
             </a>
-
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
@@ -255,31 +251,19 @@
                     <div class="row mb-2">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
-                                <li class="breadcrumb-item active"><a href="{{route('profile')}}">Profile</li>
+                                <li class="breadcrumb-item active"><a href="{{route('profile')}}">Profile</a></li>
                             </ol>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
+                    </div><!-- /.col -->
+                </div><!-- /.row --> 
+                <div class="container-fluid">
+                        @yield('content')
+                </div>
+            </div><!-- /.container-fluid -->
+        </div>
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <section class="content">
-                    <div class="wrapper">
-                        <div class="content-page">
-                            <div class="content">
-                                <div class="container-fluid">
-                                    @yield('content')
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </div>
-    </div>
-    </div>
-    </section>
-    </div>
+
 
     </div><!-- /.container-fluid -->
     </section>
