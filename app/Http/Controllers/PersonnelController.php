@@ -75,11 +75,11 @@ class PersonnelController extends Controller
         return view('Accueil_personnel.abscence', compact('personnels', 'absences'));
     }
 
-    public function showProfile()
+    public function showProfile($id)
     {
-        $user = auth()->user(); // Récupère l'utilisateur authentifié
-        $personnel = Personnel::where('email', $user->email)->first(); // Récupère les informations personnelles de l'utilisateur
-        return view('profile.show', compact('user', 'personnel'));
+        $personnel = Personnel::where('immat', $id)->first(); // Récupère les informations personnelles de l'utilisateur
+        $fonction =$personnel->fonction;
+        return view('Accueil_personnel.profile', compact( 'personnel'));
     }
     //Affichage la liste des personnels
     public function index(){

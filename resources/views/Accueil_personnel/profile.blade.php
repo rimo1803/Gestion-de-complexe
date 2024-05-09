@@ -1,55 +1,46 @@
-<!-- profile.blade.php -->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 600px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        p {
-            margin-bottom: 10px;
-        }
-        .btn {
-            display: block;
-            width: 120px;
-            padding: 10px;
-            margin: 20px auto;
-            text-align: center;
-            color: #fff;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
+@extends('layouts.mainuser')
+@section('content')
     <div class="container">
-        <h1>Profil de {{ $personnel->name }}</h1>
-        <p><strong>Nom:</strong> {{ $personnel->name }}</p>
-        <p><strong>Email:</strong> {{ $personnel->email }}</p>
+        <div class="row">
+            <div class="col-md8 mx-auto">
+                <div class="card my-5">
+                    <div class="card-header bg-white text-center p-3">
+                        <h3 class="text-dark">{{$personnel->Nomper}} {{$personnel->prenomper}}</h3>
+                    </div>
+                    <div class="card-body">
+                            <div class="form-group mb-3">
+                                <label class="form-label fw-bold" for="matricule">Matricule</label>
+                                <input type="text" disabled name="matricule" value="{{$personnel->immat}}"  class="form-control">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="fullname" class="form-label fw-bold">Full Name</label>
+                                <input type="text" disabled name="fullname" value="{{$personnel->Nomper}} {{$personnel->prenomper}}" class="form-control">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="form-label fw-bold" for="cin">CIN</label>
+                                <input type="text" disabled class="form-control" value="{{$personnel->CIN}}"  name="cin">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label fw-bold" for="dateaffe">Date d'affectaion</label>
+                                <input type="date" disabled class="form-control" value="{{$personnel->date_affectation}}" name="dateaffe">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label fw-bold" for="dtna">Date de Naissance</label>
+                                <input type="date" disabled class="form-control" value="{{$personnel->date_naissance}}" name="dtna">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label fw-bold" for="lieu">Lieu de Naissance</label>
+                                <input type="text" disabled class="form-control" value="{{$personnel->lieu_naissance}}" name="lieu">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label fw-bold" for="gr">Grade</label>
+                                <input type="text" disabled class="form-control" value="{{$personnel->grade}}" name="gr">
+                            </div>
+             
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+    @endsection

@@ -178,7 +178,7 @@
                             alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="{{ route('profile') }}" class="d-block">Hafsa Zian</a>
+                        <a href="" class="d-block">Hafsa Zian</a>
                     </div>
                 </div>
 
@@ -251,10 +251,10 @@
                     <div class="row mb-2">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{route('accueil')}}">Home</a></li>
-                                <li class="breadcrumb-item active"><a href="{{route('profile')}}">Profile</a></li>
+                                <li class="breadcrumb-item active"><a href="">Profile</a></li>
                             </ol>
                     </div><!-- /.col -->
-                </div><!-- /.row --> 
+                </div><!-- /.row -->
                 <div class="container-fluid">
                         @yield('content')
                 </div>

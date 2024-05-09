@@ -182,7 +182,7 @@
                             alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="{{ route('profile') }}" class="d-block">Hafsa Zian</a>
+                        <a href="" class="d-block">Hafsa Zian</a>
                     </div>
                 </div>
 
@@ -259,7 +259,7 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{route('accueildire')}}">Home</a></li>
-                                <li class="breadcrumb-item active"><a href="{{route('profile')}}">Profile</li>
+                                <li class="breadcrumb-item active"><a href="">Profile</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
