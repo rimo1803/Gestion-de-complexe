@@ -37,12 +37,12 @@ Route::group(['middleware' => 'web'], function () {
 });
 
 Route::get('/accueil', function () {
-    return view('layouts.mainuser');
+    return view('layouts.master');
 })->name('accueil');
 Route::get('/accueildire', function () {
-    return view('layouts.mainadmin');
+    return view('layouts.master');
 })->name('accueildire');
-Route::get('/absences/{id}', [PersonnelController::class, 'showpersonnelabsence'])->name('show');
+Route::get('/absences/{id}', [PersonnelController::class, 'showpersonnelabsence'])->name('showabs');
 Route::get('/liste', [PersonnelController::class, 'index'])->name('showliste');
 Route::get('/profile/{id}', [PersonnelController::class, 'showProfile'])->name('profile');
 

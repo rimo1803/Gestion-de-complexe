@@ -1,6 +1,7 @@
-@extends('layouts.mainuser')
+@extends('layouts.master')
 @section('content')
-<br>
+<div class="page-wrapper">
+    <div class="content container-fluid">
         <h2>Les absences du personnel {{ $personnels->Nomper }} {{ $personnels->prenomper }}</h2>
             <div class="p-6 px-0 overflow-scroll">
               <table class="w-full text-left table-auto min-w-max">
