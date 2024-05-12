@@ -5,6 +5,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\abscence;
+use App\Models\Role;
+
 
 use Illuminate\Notifications\Notifiable;
 
@@ -48,6 +50,12 @@ public function setPhotoProfilAttribute($value)
 {
     return $this->belongsToMany(Organisme::class, 'organisme_personnel', 'personnel_id', 'organisme_id');
 }
+public function role()
+{
+    return $this->belongsTo(Role::class, 'role_id');
+}
+
+
 
     public function absences()
         {
@@ -57,4 +65,31 @@ public function setPhotoProfilAttribute($value)
         {
             return $this->hasOne(Personnel::class)->where('id', $this->id);
         }
+        public function roles()
+        {
+            return $this->belongsToMany(Role::class);
+        }
+        public function hasRole($roleName)
+        {
+            $role = $this->roles()->where('name', $roleName)->first();
+            return $role !== null;
+        }
+        public function login(Request $request)
+        {
+            // Vérifiez les informations d'identification de l'utilisateur
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                // Récupérez l'utilisateur authentifié
+                $user = Auth::user();
+                // Redirigez en fonction du rôle de l'utilisateur
+                if ($user->hasRole('directeur')) { // Correction ici : 'directeur' au lieu de 'director'
+                    return redirect()->route('layouts.mainadmin');
+                } elseif ($user->hasRole('normal_user')) {
+                    return redirect()->route('layouts.mainuser');
+                }
+            }
+
+            // Redirection en cas d'échec de l'authentification
+            return redirect()->back()->withInput()->withErrors(['email' => 'Email ou mot de passe incorrect']);
+        }
+
 }

@@ -162,6 +162,18 @@
             <span class="text-danger">{{ $message }}</span>
         @enderror
         </div>
+        <div class="form-group">
+            <label for="role_id">Rôle:</label>
+            <select name="role_id" id="role_id" required>
+                <option value="">Sélectionnez un rôle</option>
+                <option value="1">Directeur</option>
+                <option value="2">Utilisateur normal</option>
+            </select>
+            @error('role_id')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
         <button type="submit">Créer Utilisateur</button>
     </form>
     @if ($errors->any())
