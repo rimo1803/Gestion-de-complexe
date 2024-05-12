@@ -34,7 +34,8 @@ class PersonnelController extends Controller
             'date_affectation' => ['required', 'date'],
             'diplome' => ['required'],
             'lieu_naissance' => ['required'],
-            'photo_profil' => ['required']
+            'photo_profil' => ['required'],
+            'role_id' => ['required', 'exists:roles,id'],
         ]);
 
         try {
@@ -50,6 +51,7 @@ class PersonnelController extends Controller
             $personnel->date_affectation = $request->date_affectation;
             $personnel->diplome = $request->diplome;
             $personnel->lieu_naissance = $request->lieu_naissance;
+            $personnel-> role_id = $request->role_id;
 
             // Gestion du téléchargement de la photo de profil
             if ($request->hasFile('photo_profil')) {
@@ -86,4 +88,5 @@ class PersonnelController extends Controller
         $personnels = personnel::orderBy('date_affectation')->get();;
         return view('Accueil_directeur.index',compact('personnels'));
     }
+
 }
