@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,7 +51,6 @@ class AuthController extends Controller
         'email' => 'Les informations d\'identification fournies ne sont pas valides.',
     ]);
 }
-
 
 }
 
