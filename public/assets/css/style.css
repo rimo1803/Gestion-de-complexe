@@ -1326,11 +1326,11 @@ table.dataTable thead > tr > td.sorting {
 -----------------------*/
 
 .header {
-	background:  #453a94;
-	background: -moz-linear-gradient(right, #f43b48 0%, #453a94 100%);
-	background: -webkit-linear-gradient(right, #f43b48 0%, #453a94 100%);
-	background: -ms-linear-gradient(right, #f43b48 0%, #453a94 100%);
-	background: linear-gradient(to left, #f43b48 0%, #453a94 100%);
+    background: #409a69;
+	background: -moz-linear-gradient(left, #409a69 0%, #453a94 100%);
+	background: -webkit-linear-gradient(left, #409a69 0%, #453a94 100%);
+	background: -ms-linear-gradient(left, #409a69 0%, #453a94 100%);
+	background: linear-gradient(to right, #409a69 0%, #453a94 100%);
 	border-bottom: 1px solid transparent;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
 	height: 75px;
@@ -1354,6 +1354,7 @@ table.dataTable thead > tr > td.sorting {
 	display: inline-block;
 	line-height: 60px;
 }
+
 .bar-icon {
     display: inline-block;
     width: 21px;
@@ -1496,7 +1497,7 @@ table.dataTable thead > tr > td.sorting {
 -----------------------*/
 
 .sidebar {
-    background-color: #34444c;
+    background-color: #409a69;
     border-right: 1px solid transparent;
     bottom: 0;
     left: 0;
@@ -1917,6 +1918,7 @@ table.dataTable thead > tr > td.sorting {
 }
 .account-logo img {
 	width: 100px;
+
 }
 .account-footer {
     text-align: center;

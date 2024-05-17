@@ -1,7 +1,6 @@
 
 <!-- Sidebar -->
-<div class="sidebar" id="sidebar" style="background: rgb(69,58,148);
-background: linear-gradient(113deg, rgba(69,58,148,1) 14%, rgba(244,59,72,1) 86%);">
+<div class="sidebar" id="sidebar">
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
                 <li class="submenu">

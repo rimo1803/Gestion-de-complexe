@@ -73,7 +73,7 @@
             <!-- Logo -->
             <div class="header-left">
                 <a href="{{ route('accueil') }}" class="logo">
-                    <img src="{{ asset('dist/img/logo.png') }}" width="40" height="40" alt="">
+                    <img src="{{ asset('dist/img/Logo.png') }}" width="40" height="40" alt="" style="border-radius: 40%;">
                 </a>
             </div>
             <!-- /Logo -->
@@ -156,7 +156,7 @@
                 <li class="nav-item dropdown has-arrow main-drop">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <span class="user-img">
-                            <img src="{{ asset('dist/img/logo.png') }}" alt="">
+                            <img src="{{ asset('dist/img/Logo.png') }}" alt="">
                             <span class="status online"></span></span>
                         <span>{{ Session::get('name') }}</span>
                     </a>
