@@ -2,8 +2,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CongeController;
-use App\Http\Controllers\PersonnelController;
+use App\Http\Controllers\AbscenceController;
 use App\Http\Controllers\DirecteurController;
+use App\Http\Controllers\PersonnelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,10 @@ Route::get('/accueildire', function () {
 })->name('accueildire');
 
 // Route pour afficher les absences d'un utilisateur
-Route::get('/absences/{id}', [PersonnelController::class, 'showpersonnelabsence'])->name('showabs');
+Route::get('/absences/{id}', [PersonnelController::class, 'showpersonnelabsence'])->name('showabsper');
+
+// Route pour afficher les absences
+Route::get('/absences', [AbscenceController::class, 'showabs'])->name('showabs');
 
 // Route pour afficher la liste des utilisateurs
 Route::get('/liste', [PersonnelController::class, 'index'])->name('showliste');

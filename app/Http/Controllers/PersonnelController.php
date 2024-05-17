@@ -76,6 +76,7 @@ class PersonnelController extends Controller
 
         return view('Accueil_personnel.abscence', compact('personnels', 'absences'));
     }
+    
 
     public function showProfile($id)
     {
