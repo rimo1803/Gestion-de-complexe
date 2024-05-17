@@ -11,7 +11,7 @@ class CreatePersonnelRoleTable extends Migration
             $table->id();
             $table->foreignId('personnel_id')->constrained()->onDelete('cascade');
             $table->foreignId('role_id')->constrained()->onDelete('cascade');
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('set null');
+
 
             $table->timestamps();
         });

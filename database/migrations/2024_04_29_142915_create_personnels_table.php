@@ -30,8 +30,8 @@ return new class extends Migration
             $table->unsignedBigInteger('fonction_id')->nullable();
             $table->foreign('fonction_id')->references('id')->on('fonctions')->onDelete('set null');
 
-            $table->unsignedBigInteger('old_role_id')->nullable();
-            $table->foreign('old_role_id')->references('id')->on('roles')->onDelete('set null');
+            $table->unsignedBigInteger('role_id')->nullable();
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('set null');
 
 
         });

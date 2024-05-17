@@ -14,10 +14,10 @@ class CreateRolesTable extends Migration
             $table->timestamps();
         });
 
-        // Créer les rôles initiaux
+  
         Role::create(['name' => 'directeur']);
         Role::create(['name' => 'formateur']);
-        // Ajoutez d'autres rôles si nécessaire
+
     }
 
     public function down()
