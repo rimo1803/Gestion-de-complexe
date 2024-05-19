@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CongeController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\DirecteurController;
-
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,3 +52,10 @@ Route::get('/profile/{id}', [PersonnelController::class, 'showProfile'])->name('
 Route::get('/create-directeur', [DirecteurController::class, 'create'])->name('directeur.create');
 Route::post('/store-directeur', [DirecteurController::class, 'store'])->name('directeur.store');
 
+// routes/web.php
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+});
