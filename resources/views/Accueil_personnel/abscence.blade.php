@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.main')
 @section('content')
  <div class="page-wrapper">
         <div class="content container-fluid">
@@ -6,7 +6,7 @@
                 <div class="col-md-10 mx-auto">
                     <div class="card my-3">
                         <div class="card-header">
-                            <h4 class="text-center">LISTE ABSCENCES</h4>
+                            <h4 class="text-center">MES ABSCENCES</h4>
                         </div>
                         <div class="card-body">
                             <table id="myTable" class="table table-boredered table-striped">

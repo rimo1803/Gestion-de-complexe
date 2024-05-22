@@ -28,7 +28,7 @@
                     <span> Gestion des conges </span></a>
                 </li><br>
                 <li class="submenu">
-                    <a href="#" class=""><i class="la la-money"></i>
+                    <a href="#" class=""><i class="la la-money" ></i>
                     <span> Gestion des missions</span></a>
                 </li><br>
                 <li>

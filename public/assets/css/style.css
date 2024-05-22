@@ -1800,6 +1800,7 @@ table.dataTable thead > tr > td.sorting {
 	font-weight: normal;
 	margin-bottom: 20px;
 }
+
 .add-btn {
     background-color: #f43b48;
     border: 1px solid #f43b48;
@@ -1809,11 +1810,44 @@ table.dataTable thead > tr > td.sorting {
     font-weight: 500;
     min-width: 140px;
 }
+.aj-btn{
+    background-color:rgb(130, 219, 130);
+    border: 1px solid rgb(144, 218, 144);
+    border-radius: 50px;
+    color: #fff;
+    float: right;
+    font-weight: 500;
+    min-width: 140px;
+}
+.aj-btn:hover,
+.aj-btn:focus,
+.aj-btn:active {
+    background-color: #7ac278;
+    border: 1px solid #95f160;
+    color: #fff;
+}
+.btn-imp{
+    background-color: #6aa1e9;
+    border: 1px solid #8090e7;
+    border-radius: 50px;
+    color: #f1e7e7;
+    float: left;
+    font-weight: 100;
+    min-width: 100px;
+    margin-right: 10px;
+}
+.btn-imp:hover,
+.btn-imp:focus,
+.btn-imp:active {
+	background-color: #502cf0;
+	border: 1px solid #5fb972;
+    color: #fff;
+}
 .add-btn:hover,
 .add-btn:focus,
 .add-btn:active {
-	background-color: #f10e1d;
-	border: 1px solid #f10e1d;
+	background-color: #60da5c;
+	border: 1px solid #2e6b0b;
     color: #fff;
 }
 .add-btn i {
@@ -1977,12 +2011,12 @@ table.dataTable thead > tr > td.sorting {
 	padding-right: 15px;
 }
 .dash-widget-icon {
-	background-color: rgba(244, 59, 72, 0.2);
+	background-color: rgba(148, 159, 221, 0.2);
 	border-radius: 100%;
-	color: #f43b48;
+	color: #684de4;
 	display: inline-block;
 	float: left;
-	font-size: 30px;
+	font-size: 40px;
 	height: 60px;
 	line-height: 60px;
 	margin-right: 10px;

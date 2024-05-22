@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-
-
-
+use App\Models\abscence;
 use App\Models\personnel;
-
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Symfony\Component\HttpFoundation\Session\Session;
+
+use App\Exports\PersonnelExport;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class PersonnelController extends Controller
 {
@@ -20,6 +20,8 @@ class PersonnelController extends Controller
         return view('Accueil_directeur.create');
 
     }
+
+
 // fonction store
 public function store(Request $request)
 {
@@ -78,8 +80,6 @@ public function store(Request $request)
         return back()->withInput()->withErrors(['error' => 'Une erreur est survenue lors de la création du personnel. Veuillez réessayer.']);
     }
 }
-
-
     public function showpersonnelabsence($id)
     {
         $personnels = personnel::findOrFail($id);
@@ -87,7 +87,7 @@ public function store(Request $request)
 
         return view('Accueil_personnel.abscence', compact('personnels', 'absences'));
     }
-    
+
 
     public function showProfile($id)
     {
@@ -101,4 +101,37 @@ public function store(Request $request)
         return view('Accueil_directeur.index',compact('personnels'));
     }
 
+
+    //Exportation Excel
+
+    public function export()
+    {
+        return Excel::download(new PersonnelExport, 'Personnels.xlsx');
+    }
+    //Modification de personnel
+    public function edit($id)
+    {
+        //
+        $personnel = personnel::where('immat', $id)->first();
+        return view("Accueil_directeur.Edit")->with([
+            "personnel" => $personnel
+        ]);
+    }
+    //la fonction de update personnel
+    public function update(Request $request, $id)
+    {
+        $personnel = personnel::where('immat', $id)->first();
+        $personnel->update($request->all());
+        return redirect()->route("showliste")->with([
+            "success" => "Employe updated successfully"
+        ]);
+        return redirect('/')->with('success', 'Personnel mis à jour avec succès.');
+    }
+
+
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    //Importation Excel
 }
+

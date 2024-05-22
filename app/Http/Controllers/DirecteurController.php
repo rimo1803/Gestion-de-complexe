@@ -1,10 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Role;
+use App\Models\conge;
+use App\Models\mission;
+use App\Models\abscence;
 use App\Models\Personnel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Role;
 
 class DirecteurController extends Controller
 {
@@ -12,6 +16,32 @@ class DirecteurController extends Controller
 {
     return view('Accueil_directeur.createdire');
 }
+    public function index(){
+       // Dashboard statistics
+       $totalPers = Personnel::count();
+       $totalAbsence = Abscence::count();
+       $totalConge = Conge::count();
+       $totalMission = Mission::count();
+       $todaysAbsences = Abscence::whereDate('date_debut', '<=', now())
+                              ->whereDate('date_fin', '>=', now())
+                              ->join('personnels', 'abscences.immat_per', '=', 'personnels.immat')
+                              ->select('abscences.*', 'personnels.Nomper', 'personnels.prenomper')
+                              ->get();
+        $totalTodaysAbsences = $todaysAbsences->count();
+
+
+        return view('Accueil_directeur.home', [
+            'data' => [
+                'totalPers' => $totalPers,
+                'totalAbsence' => $totalAbsence,
+                'totalConge' => $totalConge,
+                'totalMission' => $totalMission,
+                'totalTodaysAbsences' => $totalTodaysAbsences,
+
+            ],
+            'todaysAbsences' => $todaysAbsences,
+        ]);
+    }
 
 public function store(Request $request)
 {
