@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CongeController;
 use App\Http\Controllers\AbscenceController;
@@ -32,16 +33,17 @@ Route::group(['middleware' => 'web'], function () {
 
 // Route pour afficher l'accueil de l'utilisateur normal
 Route::get('/accueil', function () {
-    return view('layouts.master');
+    return view('layouts.main');
 })->name('accueil');
 
 // Route pour afficher l'accueil du directeur
-Route::get('/accueildire', function () {
-    return view('layouts.master');
-})->name('accueildire');
+Route::get('/accueildire', [DirecteurController::class, 'index'])->name('accueildire');
 
 // Route pour afficher les absences d'un utilisateur
-Route::get('/absences/{id}', [PersonnelController::class, 'showpersonnelabsence'])->name('showabsper');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/absences', [AbscenceController::class, 'showpersonnelabsence'])->name('showabsper');
+});
+
 
 // Route pour afficher les absences
 Route::get('/absences', [AbscenceController::class, 'showabs'])->name('showabs');
@@ -52,7 +54,16 @@ Route::get('/liste', [PersonnelController::class, 'index'])->name('showliste');
 // Route pour afficher le profil d'un utilisateur
 Route::get('/profile/{id}', [PersonnelController::class, 'showProfile'])->name('profile');
 
+//Route pour modifier un personnel
+Route::get('/edit/{id}', [PersonnelController::class, 'edit'])->name('Edit');
+Route::put('/edit/{id}', [PersonnelController::class, 'update'])->name('update');
+
 // Route pour créer un directeur
 Route::get('/create-directeur', [DirecteurController::class, 'create'])->name('directeur.create');
 Route::post('/store-directeur', [DirecteurController::class, 'store'])->name('directeur.store');
+
+Route::get('/generate-pdf', [PDFController::class, 'generatePDF'])->name('pdf');;
+
+//Route pour Exportation Excel
+Route::get('/export', [PersonnelController::class, 'export'])->name('export');
 

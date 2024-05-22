@@ -20,9 +20,6 @@
     <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('assets/img/favicon.png') }}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ URL::to('assets/css/bootstrap.min.css') }}">
     <!-- Fontawesome CSS -->
@@ -39,7 +36,6 @@
     <link rel="stylesheet" href="{{ URL::to('ssets/plugins/morris/morris.css') }}">
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ URL::to('assets/css/style.css') }}">
-
     {{-- message toastr --}}
     <link rel="stylesheet" href="{{ URL::to('assets/css/toastr.min.css') }}">
     <script src="{{ URL::to('assets/js/toastr_jquery.min.js') }}"></script>
@@ -72,7 +68,7 @@
         <div class="header">
             <!-- Logo -->
             <div class="header-left">
-                <a href="{{ route('accueil') }}" class="logo">
+                <a href="{{ route('accueildire') }}" class="logo">
                     <img src="{{ asset('dist/img/Logo.png') }}" width="40" height="40" alt="" style="border-radius: 40%;">
                 </a>
             </div>
@@ -105,24 +101,6 @@
                     </div>
                 </li>
                 <!-- /Search -->
-
-                <!-- Flag -->
-                <li class="nav-item dropdown has-arrow flag-nav">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                        <img src="{{ URL::to('assets/img/flags/us.png') }}" alt="" height="20">
-                        <span>English</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="{{ URL::to('assets/img/flags/us.png') }}" alt="" height="16"> English
-                        </a>
-                        <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="{{ URL::to('assets/img/flags/maroc.png') }}" alt="" height="16"> Arabe
-                        </a>
-                    </div>
-                </li>
-                <!-- /Flag -->
-
                 <!-- Notifications -->
                 <li class="nav-item dropdown">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">

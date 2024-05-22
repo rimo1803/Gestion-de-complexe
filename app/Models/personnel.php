@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Models\abscence;
 use App\Models\Role;
-
-
+use App\Models\abscence;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Personnel extends Authenticatable
 {
@@ -59,12 +60,9 @@ public function role()
 
     public function absences()
         {
-            return $this->hasMany(abscence::class, 'immat_per', 'immat');
+            return $this->hasMany(abscence::class, 'immat', 'immat_per');
         }
-    public function personnel()
-        {
-            return $this->hasOne(Personnel::class)->where('id', $this->id);
-        }
+
         public function roles()
         {
             return $this->belongsToMany(Role::class);
