@@ -15,9 +15,9 @@ use App\Http\Controllers\PersonnelController;
 */
 
 // Route pour afficher le formulaire de connexion
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
 // Route pour gérer la soumission du formulaire de connexion
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/', [AuthController::class, 'login']);
 
 // Route pour afficher le formulaire de demande de congé
 Route::get('/demande-conge', [CongeController::class, 'creation'])->name('demande.conge');
