@@ -51,12 +51,29 @@ class CongeController extends Controller
 public function refuserDemandeConge($id)
 {
     $conge = Conge::findOrFail($id);
-    $conge->decision_conge = 'Refusé'; // Mettre à jour la décision du congé
+    $conge->decision_conje = 'Refusé';
     $conge->save();
 
-    // Envoyer le document de décision au formateur par email ou autre méthode
 
     return redirect()->back()->with('success', 'Demande de congé refusée avec succès.');
+}
+public function listeDemandesUtilisateur()
+{
+    $demandes = Conge::where('immat_per', Auth::user()->immat)->get();
+    return view('liste_demandes_conge', ['demandes' => $demandes]);
+}
+
+public function supprimerDemandeConge($id)
+{
+    $conge = Conge::findOrFail($id);
+
+    // Vérifier si la demande de congé est en attente
+    if ($conge->decision_conje === 'En attente') {
+        $conge->delete();
+        return redirect()->back()->with('success', 'Demande de congé supprimée avec succès.');
+    }
+
+    return redirect()->back()->with('error', 'Impossible de supprimer cette demande de congé.');
 }
 
     }

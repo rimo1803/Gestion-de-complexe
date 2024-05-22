@@ -2,9 +2,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CongeController;
-use App\Http\Controllers\PersonnelController;
+use App\Http\Controllers\AbscenceController;
 use App\Http\Controllers\DirecteurController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PersonnelController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,8 +22,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/demande-conge', [CongeController::class, 'creation'])->name('demande.conge');
 Route::post('/demande-conge', [CongeController::class, 'demanderConge'])->name('demande.conge.submit');
 Route::delete('/demande-conge/{id}', [CongeController::class, 'supprimerDemandeConge'])->name('demande.conge.supprimer');
-Route::put('/demande-conge/{id}/valider', [CongeController::class, 'validerDemandeConge'])->name('demande.conge.valider');
-Route::put('/demande-conge/{id}/refuser', [CongeController::class, 'refuserDemandeConge'])->name('demande.conge.refuser');
+Route::get('/mes-demandes-conge', [CongeController::class, 'listeDemandesUtilisateur'])->name('mes_demandes.conge');
+
 
 // Route pour créer un utilisateur
 Route::group(['middleware' => 'web'], function () {
@@ -40,7 +42,10 @@ Route::get('/accueildire', function () {
 })->name('accueildire');
 
 // Route pour afficher les absences d'un utilisateur
-Route::get('/absences/{id}', [PersonnelController::class, 'showpersonnelabsence'])->name('showabs');
+Route::get('/absences/{id}', [PersonnelController::class, 'showpersonnelabsence'])->name('showabsper');
+
+// Route pour afficher les absences
+Route::get('/absences', [AbscenceController::class, 'showabs'])->name('showabs');
 
 // Route pour afficher la liste des utilisateurs
 Route::get('/liste', [PersonnelController::class, 'index'])->name('showliste');

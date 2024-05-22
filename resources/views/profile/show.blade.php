@@ -1,86 +1,164 @@
-<!-- resources/views/profile/show.blade.php -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profile</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
 
-@extends('layouts.master')
+        .container {
+            margin: 110px 10px 0 10px;
+            max-width: 600px;
+            width: 100%;
+        }
 
-@section('content')
-<div class="container" style="margin-right: 110px">
-    <h1>Profile</h1>
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #343a40;
+        }
 
-    <div class="card">
-        <div class="card-header">
-            Profile Information
-        </div>
-        <div class="card-body">
-            @if($personnel->photo_profil)
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #dee2e6;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #495057;
+        }
+
+        .form-group input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #495057;
+        }
+
+        .form-group img {
+            display: block;
+            margin: 10px auto;
+            border-radius: 50%;
+            border: 2px solid #ced4da;
+        }
+    </style>
+</head>
+<body>
+
+    @extends('layouts.master')
+
+    @section('content')
+    <div class="container">
+        <h1>Profile</h1>
+
+        <div class="card">
+            <div class="card-header">
+                Profile Information
+            </div>
+            <div class="card-body">
+
+                @if(auth()->check() && auth()->user()->photo_profil)
+                    <img src="{{ asset('storage/profile_pictures/'.basename(auth()->user()->photo_profil)) }}" alt="Photo de Profil">
+                @else
+                    <img src="{{ asset('images/placeholder.jpg') }}" alt="Photo de Profil">
+                @endif
+
                 <div class="form-group">
-                    <label for="photo_profil">Profile Photo</label>
-                    <div>
-                        <img src="{{ asset('storage/public/profile_pictures/' . auth()->user()->photo_profil) }}"
-                        alt="Profile Photo" style="width: 150px; height: 150px; object-fit: cover;">
-                    </div>
+                    <label for="Nomper">Nom</label>
+                    <input type="text" name="Nomper" class="form-control" value="{{ $personnel->Nomper }}" disabled>
                 </div>
-            @endif
 
-            <div class="form-group">
-                <label for="Nomper">Nom</label>
-                <input type="text" name="Nomper" class="form-control" value="{{ $personnel->Nomper }}" disabled>
-            </div>
+                <div class="form-group">
+                    <label for="prenomper">Prénom</label>
+                    <input type="text" name="prenomper" class="form-control" value="{{ $personnel->prenomper }}" disabled>
+                </div>
 
-            <div class="form-group">
-                <label for="prenomper">Prénom</label>
-                <input type="text" name="prenomper" class="form-control" value="{{ $personnel->prenomper }}" disabled>
-            </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="form-control" value="{{ $personnel->email }}" disabled>
+                </div>
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" name="email" class="form-control" value="{{ $personnel->email }}" disabled>
-            </div>
+                <div class="form-group">
+                    <label for="immat">Immat</label>
+                    <input type="text" name="immat" class="form-control" value="{{ $personnel->immat }}" disabled>
+                </div>
 
-            <div class="form-group">
-                <label for="immat">Immat</label>
-                <input type="text" name="immat" class="form-control" value="{{ $personnel->immat }}" disabled>
-            </div>
+                <div class="form-group">
+                    <label for="date_naissance">Date de Naissance</label>
+                    <input type="date" name="date_naissance" class="form-control" value="{{ $personnel->date_naissance }}" disabled>
+                </div>
 
-            <div class="form-group">
-                <label for="date_naissance">Date de Naissance</label>
-                <input type="date" name="date_naissance" class="form-control" value="{{ $personnel->date_naissance }}" disabled>
-            </div>
+                <div class="form-group">
+                    <label for="grade">Grade</label>
+                    <input type="text" name="grade" class="form-control" value="{{ $personnel->grade }}" disabled>
+                </div>
 
-            <div class="form-group">
-                <label for="grade">Grade</label>
-                <input type="text" name="grade" class="form-control" value="{{ $personnel->grade }}" disabled>
-            </div>
+                <div class="form-group">
+                    <label for="CIN">CIN</label>
+                    <input type="text" name="CIN" class="form-control" value="{{ $personnel->CIN }}" disabled>
+                </div>
 
-            <div class="form-group">
-                <label for="CIN">CIN</label>
-                <input type="text" name="CIN" class="form-control" value="{{ $personnel->CIN }}" disabled>
-            </div>
+                <div class="form-group">
+                    <label for="date_affectation">Date d'Affectation</label>
+                    <input type="date" name="date_affectation" class="form-control" value="{{ $personnel->date_affectation }}" disabled>
+                </div>
 
-            <div class="form-group">
-                <label for="date_affectation">Date d'Affectation</label>
-                <input type="date" name="date_affectation" class="form-control" value="{{ $personnel->date_affectation }}" disabled>
-            </div>
+                <div class="form-group">
+                    <label for="diplome">Diplôme</label>
+                    <input type="text" name="diplome" class="form-control" value="{{ $personnel->diplome }}" disabled>
+                </div>
 
-            <div class="form-group">
-                <label for="diplome">Diplôme</label>
-                <input type="text" name="diplome" class="form-control" value="{{ $personnel->diplome }}" disabled>
-            </div>
+                <div class="form-group">
+                    <label for="lieu_naissance">Lieu de Naissance</label>
+                    <input type="text" name="lieu_naissance" class="form-control" value="{{ $personnel->lieu_naissance }}" disabled>
+                </div>
 
-            <div class="form-group">
-                <label for="lieu_naissance">Lieu de Naissance</label>
-                <input type="text" name="lieu_naissance" class="form-control" value="{{ $personnel->lieu_naissance }}" disabled>
-            </div>
+                <div class="form-group">
+                    <label for="role_id">Role</label>
+                    <input type="text" name="role_id" class="form-control" value="{{ $personnel->role->name }}" disabled>
+                </div>
 
-            <div class="form-group">
-                <label for="role_id">Role</label>
-                <input type="text" name="role_id" class="form-control" value="{{ $personnel->role->name }}" disabled>
-            </div>
-
-            <div class="form-group">
-                <label for="status">Status</label>
-                <input type="text" name="status" class="form-control" value="{{ $personnel->status }}" disabled>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <input type="text" name="status" class="form-control" value="{{ $personnel->status }}" disabled>
+                </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection
+
+</body>
+</html>

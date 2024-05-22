@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center mt-5">
             <div class="col-md-6">
-                <div class="card">
+                <div class="card" style="margin-top: 80px">
                     <div class="card-header">Demande de Congé</div>
                     <div class="card-body">
                         <p>Nom : {{ Auth::user()->Nomper }}</p>

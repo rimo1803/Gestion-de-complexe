@@ -73,6 +73,7 @@
             min-height: 100vh;
             flex-direction: column;
             text-align: center;
+            margin-top: 80px;
         }
 
         </style>
