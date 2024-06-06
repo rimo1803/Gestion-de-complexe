@@ -11,17 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-        Schema::create('attestations_travail', function (Blueprint $table) {
+        Schema::create('attestation_travails', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('attestation_id');
+            $table->foreignId('attestation_id')->constrained()->onDelete('cascade');
             $table->string('position');
             $table->string('department');
             $table->date('date_start');
             $table->date('date_end')->nullable();
             $table->timestamps();
-
-            $table->foreign('attestation_id')->references('id')->on('attestations')->onDelete('cascade');
         });
     }
 
@@ -30,7 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
-        Schema::dropIfExists('attestations_travail');
+        Schema::dropIfExists('attestation_travails');
     }
 };

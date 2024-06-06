@@ -8,14 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class AttestationTravail extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'attestation_id', 'position', 'department', 'date_start', 'date_end'
+        'attestation_id',
+        'position',
+        'department',
+        'date_start',
+        'date_end',
     ];
 
     public function attestation()
     {
         return $this->belongsTo(Attestation::class);
     }
-
 }

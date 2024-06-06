@@ -5,14 +5,16 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Role;
 use App\Models\conge;
+use App\Models\Mission;
+use App\Models\Abscence;
 use App\Models\organisme;
 use App\Models\personnel;
-use App\Models\moyenTransport;
-use App\Models\Abscence;
 use App\Models\Attestation;
-use App\Models\Mission;
-
+use App\Models\moyenTransport;
+use App\Models\AttestationSalaire;
+use App\Models\AttestationTravail;
 use Illuminate\Database\Seeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -47,6 +49,15 @@ class DatabaseSeeder extends Seeder
 
         // Seed pour la table 'missions'
         Mission::factory()->count(20)->create();
+
+        // Seed pour la table 'attestations'
+        Attestation::factory()->count(15)->create();
+
+        // Seed pour la table 'attestations_salaire'
+        AttestationSalaire::factory()->count(10)->create();
+
+        // Seed pour la table 'attestations_travail'
+        AttestationTravail::factory()->count(10)->create();
 
         // \App\Models\User::factory(10)->create();
 
