@@ -22,9 +22,9 @@ class CreatePersonnelsTable extends Migration
             $table->date('date_affectation');
             $table->string('diplome');
             $table->string('lieu_naissance');
+            $table->enum('role', ['personnel', 'directeur'])->default('personnel');
             $table->timestamps();
-            $table->unsignedBigInteger('role_id')->nullable();
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('set null');
+
         });
     }
 

@@ -15,7 +15,9 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class PersonnelController extends Controller
 {
-
+    public function acceuil(){
+        return view('layouts.main');
+    }
     public function create()
     {
         return view('Accueil_directeur.create');

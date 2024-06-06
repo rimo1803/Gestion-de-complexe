@@ -15,42 +15,45 @@ class AuthController extends Controller
 
     public function login(Request $request)
 {
-    // Valider les données du formulaire de connexion
     $request->validate([
-        'email' => 'required|email',
+        'email' => 'required',
         'password' => 'required',
     ]);
-
-    // Tentative de connexion de l'utilisateur
-    if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-        // Récupérer l'utilisateur connecté
+    $credentials = $request->only('email', 'password');
+    $remember = $request->has('remember_me');
+    if (Auth::attempt($credentials,$remember)) {
+        $request->session()->regenerate();
         $user = Auth::user();
-
-        // Vérifier si l'utilisateur a un rôle
-        if ($user->role) {
-            // Charger la relation 'role'
-            $user->load('role');
-
-            // Redirection en fonction du rôle de l'utilisateur
-            if ($user->role->name === 'directeur') {
-                return redirect()->route('accueildire');
-            } else {
-                return redirect()->route('accueil');
-            }
-        } else {
-            // Gérer le cas où l'utilisateur n'a pas de rôle associé
-            Auth::logout();
-            return back()->withErrors([
-                'email' => 'Cet utilisateur n\'a pas de rôle associé.',
-            ]);
+        switch ($user->role) {
+            case 'directeur':
+                return redirect()->intended(route('accueildire'))->withSuccess('You have Successfully logged in');
+            case 'personnel':
+                return redirect()->intended(route('accueil'))->withSuccess('You have Successfully logged in');
+            default:
+                return redirect('login')->withErrors('Role not recognized.');
         }
     }
-
-    // Redirection en cas d'échec de l'authentification
-    return back()->withErrors([
-        'email' => 'Les informations d\'identification fournies ne sont pas valides.',
-    ]);
+    return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
 }
 
+/**
+ * Write code on Method
+ *
+ * @return response()
+ */
+/**
+ * Write code on Method
+ *
+ * @return response()
+ */
+/**
+ * Write code on Method
+ *
+ * @return response()
+ */
+public function logout(Request $request)
+{
+    $request->session()->flush();
+    return redirect('/')->withSuccess('You have successfully logged out.');
 }
-
+}

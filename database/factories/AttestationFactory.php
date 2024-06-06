@@ -19,9 +19,9 @@ class AttestationFactory extends Factory
             'type_attestation' => $this->faker->randomElement(['travail', 'salaire']),
             'date_edition' => $this->faker->date(),
             'reference' => $this->faker->uuid,
-            'immat_per' => function () {
+            'personnel_id' => function () {
                 // Sélectionne une immatriculation aléatoire parmi les personnels existants
-                return \App\Models\Personnel::all()->random()->immat;
+                return \App\Models\Personnel::all()->random()->id;
             },
         ];
     }

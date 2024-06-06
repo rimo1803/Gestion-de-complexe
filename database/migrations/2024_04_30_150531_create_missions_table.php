@@ -21,7 +21,7 @@ class CreateMissionsTable extends Migration
             $table->string('destination');
             $table->string('objet');
             $table->string('immat_pers');
-            $table->foreign('immat_pers')->references('immat')->on('personnels');
+            $table->foreignId('personnel_id')->constrained('personnels');
         });
     }
 

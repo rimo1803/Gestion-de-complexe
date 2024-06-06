@@ -13,6 +13,7 @@ class CreateCongesTable extends Migration
     {
         Schema::create('conges', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('personnel_id')->constrained()->onDelete('cascade');
             $table->timestamps();
             $table->date('date_debut');
             $table->date('date_fin');
@@ -20,8 +21,6 @@ class CreateCongesTable extends Migration
             $table->string('status')->default('en attente');
             $table->integer('reliquat');
             $table->string('remplacement');
-            $table->string('immat_per');
-            $table->foreign('immat_per')->references('immat')->on('personnels');
         });
     }
 

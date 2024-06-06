@@ -3,16 +3,17 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Role;
-use App\Models\conge;
-use App\Models\Mission;
+
 use App\Models\Abscence;
-use App\Models\organisme;
-use App\Models\personnel;
 use App\Models\Attestation;
-use App\Models\moyenTransport;
 use App\Models\AttestationSalaire;
 use App\Models\AttestationTravail;
+use App\Models\conge;
+use App\Models\mission;
+use App\Models\MoyenTransport;
+use App\Models\organisme;
+use App\Models\personnel;
+
 use Illuminate\Database\Seeder;
 
 
@@ -23,47 +24,51 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Création du rôle "directeur" s'il n'existe pas déjà
-    Role::firstOrCreate(['name' => 'directeur']);
+         // Seed pour la table 'personnels'
+         \App\Models\Personnel::factory()->count(18)->create();
 
-    // Création du rôle "personnel" s'il n'existe pas déjà
-    Role::firstOrCreate(['name' => 'personnel']);
+         // Création des deux directeurs
+         \App\Models\Personnel::factory()->create(['role' => 'directeur']);
+         \App\Models\Personnel::factory()->create(['role' => 'directeur']);
 
-        // Seed pour la table 'personnels'
-        personnel::factory()->count(20)->create();
+         // Seed pour la table 'moyen_transports'
+         \App\Models\MoyenTransport::factory()->count(5)->create();
 
-        // Seed pour la table 'moyen_transports'
-        MoyenTransport::factory()->count(10)->create();
+         // Seed pour la table 'organismes'
+         \App\Models\Organisme::factory()->count(10)->create();
 
-        // Seed pour la table 'organismes'
-        organisme::factory()->count(10)->create();
+         // Seed pour la table 'abscences' pour les personnels
+         \App\Models\Personnel::where('role', 'personnel')->get()->each(function ($personnel) {
+             $personnel->absences()->saveMany(Abscence::factory()->count(3)->make());
+         });
 
-        // Seed pour la table 'attestations'
-        Attestation::factory()->count(30)->create();
+         // Seed pour la table 'conges' pour les personnels
+         \App\Models\Personnel::where('role', 'personnel')->get()->each(function ($personnel) {
+             $personnel->conges()->saveMany(Conge::factory()->count(2)->make());
+         });
 
-        // Seed pour la table 'abscences'
-        Abscence::factory()->count(50)->create();
+         // Seed pour la table 'missions' pour les personnels
+         \App\Models\Personnel::where('role', 'personnel')->get()->each(function ($personnel) {
+             $personnel->missions()->saveMany(Mission::factory()->count(3)->make());
+         });
 
-        // Seed pour la table 'conges'
-        conge::factory()->count(30)->create();
+         // Seed pour la table 'attestations' pour les personnels
+         \App\Models\Personnel::where('role', 'personnel')->get()->each(function ($personnel) {
+             $personnel->attestations()->saveMany(Attestation::factory()->count(5)->make());
+         });
 
-        // Seed pour la table 'missions'
-        Mission::factory()->count(20)->create();
+         // Seed pour la table 'attestations' pour les personnels avec personnel_id aléatoire
+         Attestation::factory()->count(30)->create([
+             'personnel_id' => function () {
+                 // Sélectionne un ID de personnel aléatoire parmi les existants
+                 return \App\Models\Personnel::all()->random()->id;
+             },
+         ]);
 
-        // Seed pour la table 'attestations'
-        Attestation::factory()->count(15)->create();
+         // Seed pour la table 'attestations_salaire'
+         \App\Models\AttestationSalaire::factory()->count(10)->create();
 
-        // Seed pour la table 'attestations_salaire'
-        AttestationSalaire::factory()->count(10)->create();
-
-        // Seed pour la table 'attestations_travail'
-        AttestationTravail::factory()->count(10)->create();
-
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-    }
-}
+         // Seed pour la table 'attestations_travail'
+         \App\Models\AttestationTravail::factory()->count(10)->create();
+     }
+ }

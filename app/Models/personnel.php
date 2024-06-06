@@ -11,7 +11,8 @@ class Personnel extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'Nomper', 'prenomper', 'email', 'password', 'immat', 'date_naissance', 'grade', 'CIN', 'date_affectation', 'diplome', 'lieu_naissance', 'photo_profil',
+        'Nomper', 'prenomper', 'email', 'password', 'immat', 'date_naissance',
+        'grade', 'CIN', 'date_affectation', 'diplome', 'lieu_naissance', 'photo_profil','role'
     ];
 
     protected $hidden = [
@@ -45,24 +46,25 @@ class Personnel extends Authenticatable
         return $this->belongsToMany(Organisme::class, 'organisme_personnel', 'personnel_id', 'organisme_id');
     }
 
-    public function role()
-    {
-        return $this->belongsTo(Role::class, 'role_id');
-    }
+
 
     public function absences()
     {
         return $this->hasMany(Abscence::class, 'immat_per', 'immat');
     }
-
-    public function roles()
+    public function conges()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->hasMany(Conge::class);
+    }
+    public function missions()
+    {
+        return $this->hasMany(Mission::class);
+    }
+    public function attestations()
+    {
+        return $this->hasMany(Attestation::class);
     }
 
-    public function hasRole($roleName)
-    {
-        $role = $this->roles()->where('name', $roleName)->first();
-        return $role !== null;
-    }
+
+
 }

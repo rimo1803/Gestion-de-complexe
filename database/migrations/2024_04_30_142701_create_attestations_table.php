@@ -15,8 +15,8 @@ class CreateAttestationsTable extends Migration
             $table->date('date_edition');
             $table->string('reference');
             $table->timestamps();
-            $table->string('immat_per');
-            $table->foreign('immat_per')->references('immat')->on('personnels');
+            $table->unsignedBigInteger('personnel_id');
+            $table->foreign('personnel_id')->references('id')->on('personnels');
         });
     }
 

@@ -67,7 +67,7 @@ class Kernel extends HttpKernel
     ];
     protected $routeMiddleware = [
         // ...
-        'directeur' => \App\Http\Middleware\CheckDirecteurRole::class,
+        'role' => \App\Http\Middleware\RedirectIfNotPermitted::class,
     ];
 
 }

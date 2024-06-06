@@ -1,15 +1,15 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class mission extends Model
+class Mission extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'date_debut_mission', 'date_fin_mission', 'heure_debut', 'heure_fin', 'destination', 'objet', 'immat_pers'
+        'date_debut_mission', 'date_fin_mission', 'heure_debut', 'heure_fin', 'destination', 'objet', 'personnel_id'
     ];
 
     /**
@@ -17,7 +17,7 @@ class mission extends Model
      */
     public function personnel()
     {
-        return $this->belongsTo(Personnel::class, 'immat_pers', 'immat');
+        return $this->belongsTo(Personnel::class);
     }
 
     /**
@@ -25,8 +25,7 @@ class mission extends Model
      */
     public function moyenTransport()
     {
-        return $this->belongsToMany(MoyenTransport ::class, 'personnel_missions', 'mission_id', 'moyen_transport_id')
-                    ->withTimestamps();
+        return $this->belongsTo(MoyenTransport::class, 'moyen_transport_id');
     }
 
     /**

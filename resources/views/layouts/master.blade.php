@@ -140,7 +140,7 @@
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="">Profile</a>
-                        <a class="dropdown-item" href="">Deconexion</a>
+                        <a class="dropdown-item" href="{{route('logout')}}">Deconexion</a>
                     </div>
                 </li>
             </ul>

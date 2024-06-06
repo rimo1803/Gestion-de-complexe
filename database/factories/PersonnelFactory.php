@@ -17,8 +17,6 @@ class PersonnelFactory extends Factory
      */
     public function definition(): array
     {
-        $role = Role::query()->where('name', $this->faker->randomElement(['personnel', 'directeur']))->first();
-
         return [
             'Nomper' => $this->faker->lastName,
             'prenomper' => $this->faker->firstName,
@@ -32,7 +30,7 @@ class PersonnelFactory extends Factory
             'date_affectation' => $this->faker->date(),
             'diplome' => $this->faker->word,
             'lieu_naissance' => $this->faker->city,
-            'role_id' => $role->id,
+            'role' => $this->faker->randomElement(['personnel', 'directeur']),
         ];
     }
 }
