@@ -16,7 +16,6 @@ use App\Http\Controllers\PersonnelController;
 
 // Route pour afficher le formulaire de connexion
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
-// Route pour gérer la soumission du formulaire de connexion
 Route::post('/', [AuthController::class, 'login']);
 
 // Route pour afficher le formulaire de demande de congé
@@ -32,34 +31,29 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/create-user', [PersonnelController::class, 'store'])->name('personnels.store');
 });
 
-// Route pour afficher l'accueil de l'utilisateur normal
+
 Route::get('/accueil', function () {
     return view('layouts.main');
 })->name('accueil');
 
-// Route pour afficher l'accueil du directeur
 Route::get('/accueildire', [DirecteurController::class, 'index'])->name('accueildire');
 
-// Route pour afficher les absences d'un utilisateur
 Route::middleware(['auth'])->group(function () {
     Route::get('/absences', [AbscenceController::class, 'showpersonnelabsence'])->name('showabsper');
 });
 
-
-// Route pour afficher les absences
 Route::get('/absences', [AbscenceController::class, 'showabs'])->name('showabs');
 
-// Route pour afficher la liste des utilisateurs
+
 Route::get('/liste', [PersonnelController::class, 'index'])->name('showliste');
 
-// Route pour afficher le profil d'un utilisateur
+
 Route::get('/profile/{id}', [PersonnelController::class, 'showProfile'])->name('profile');
 
-//Route pour modifier un personnel
+
 Route::get('/edit/{id}', [PersonnelController::class, 'edit'])->name('Edit');
 Route::put('/edit/{id}', [PersonnelController::class, 'update'])->name('update');
 
-// Route pour créer un directeur
 Route::get('/create-directeur', [DirecteurController::class, 'create'])->name('directeur.create');
 Route::post('/store-directeur', [DirecteurController::class, 'store'])->name('directeur.store');
 
@@ -71,7 +65,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/generate-pdf', [PDFController::class, 'generatePDF'])->name('pdf');;
 
-//Route pour Exportation Excel
+
 Route::get('/export', [PersonnelController::class, 'export'])->name('export');
 
 
