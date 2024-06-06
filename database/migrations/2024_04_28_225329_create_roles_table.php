@@ -2,7 +2,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Role; // Assurez-vous d'importer le modèle Role
+use App\Models\Role;
 
 class CreateRolesTable extends Migration
 {
@@ -14,20 +14,12 @@ class CreateRolesTable extends Migration
             $table->timestamps();
         });
 
-  
         Role::create(['name' => 'directeur']);
-        Role::create(['name' => 'formateur']);
-
+        Role::create(['name' => 'personnel']);
     }
 
     public function down()
     {
         Schema::dropIfExists('roles');
-    }
-
-    public static function getRoleId($roleName)
-    {
-        $role = Role::where('name', $roleName)->first();
-        return $role ? $role->id : null;
     }
 }

@@ -4,12 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreatePersonnelsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('personnels', function (Blueprint $table) {
             $table->id();
@@ -26,22 +23,13 @@ return new class extends Migration
             $table->string('diplome');
             $table->string('lieu_naissance');
             $table->timestamps();
-
-            $table->unsignedBigInteger('fonction_id')->nullable();
-            $table->foreign('fonction_id')->references('id')->on('fonctions')->onDelete('set null');
-
             $table->unsignedBigInteger('role_id')->nullable();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('set null');
-
-
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('personnels');
     }
-};
+}

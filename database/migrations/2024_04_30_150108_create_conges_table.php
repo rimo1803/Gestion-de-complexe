@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateCongesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,8 +16,9 @@ return new class extends Migration
             $table->timestamps();
             $table->date('date_debut');
             $table->date('date_fin');
-            $table->string('descision_conje');
-            $table->integer('redicat');
+            $table->string('decision_conge')->nullable(); // Chemin du fichier de décision
+            $table->string('status')->default('en attente');
+            $table->integer('reliquat');
             $table->string('remplacement');
             $table->string('immat_per');
             $table->foreign('immat_per')->references('immat')->on('personnels');

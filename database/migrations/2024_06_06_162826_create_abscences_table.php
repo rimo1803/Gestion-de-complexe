@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('abscences', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->date('date_debut');
             $table->date('date_fin');
-            $table->string('type_abscence');
-            $table->string('justification');
+            $table->string('type_abscence')->default('non justifiée');;
+            $table->string('justification')->nullable();;
             $table->string('immat_per');
             $table->foreign('immat_per')->references('immat')->on('personnels');
-
-
+            $table->timestamps();
         });
     }
 

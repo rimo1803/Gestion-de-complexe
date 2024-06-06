@@ -4,31 +4,24 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateAttestationsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('attestations', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->string('type_attestation');
+            $table->string('type_attestation'); // 'travail' ou 'salaire'
             $table->date('date_edition');
             $table->string('reference');
             $table->timestamps();
-
             $table->string('immat_per');
             $table->foreign('immat_per')->references('immat')->on('personnels');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('attestations');
     }
-};
+}

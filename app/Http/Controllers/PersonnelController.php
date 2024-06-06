@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Exports\PersonnelExport;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -19,6 +20,23 @@ class PersonnelController extends Controller
     {
         return view('Accueil_directeur.create');
 
+    }
+    public function login(Request $request)
+    {
+        // Vérifiez les informations d'identification de l'utilisateur
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            // Récupérez l'utilisateur authentifié
+            $user = Auth::user();
+            // Redirigez en fonction du rôle de l'utilisateur
+            if ($user->hasRole('directeur')) { // Correction ici : 'directeur' au lieu de 'director'
+                return redirect()->route('layouts.mainadmin');
+            } elseif ($user->hasRole('normal_user')) {
+                return redirect()->route('layouts.mainuser');
+            }
+        }
+
+        // Redirection en cas d'échec de l'authentification
+        return redirect()->back()->withInput()->withErrors(['email' => 'Email ou mot de passe incorrect']);
     }
 
 

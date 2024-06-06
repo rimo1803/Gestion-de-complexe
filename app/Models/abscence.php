@@ -2,19 +2,41 @@
 
 namespace App\Models;
 
-use App\Models\personnel;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class abscence extends Model
+class Abscence extends Model
 {
     use HasFactory;
-    public function user()
-    {
-        return $this->belongsTo(personnel::class);
-    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'date_debut',
+        'date_fin',
+        'type_abscence',
+        'justification',
+        'immat_per',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'date_debut' => 'date',
+        'date_fin' => 'date',
+    ];
+
+    /**
+     * Get the personnel associated with the absence.
+     */
     public function personnel()
-{
-    return $this->belongsTo(personnel::class, 'immat_per', 'immat');
-}
+    {
+        return $this->belongsTo(Personnel::class, 'immat_per', 'immat');
+    }
 }

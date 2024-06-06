@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,14 +17,22 @@ class PersonnelFactory extends Factory
      */
     public function definition(): array
     {
+        $role = Role::query()->where('name', $this->faker->randomElement(['personnel', 'directeur']))->first();
+
         return [
-            //
-            'name'=>$this->faker->name(),
-            'email'=>$this->faker->email(),
-            'phone'=>$this->faker->phoneNumber(),
-            'role'=>$this->faker->randomElement(['admin','personnel']),
-            'password'=>bcrypt('password'),
-            
+            'Nomper' => $this->faker->lastName,
+            'prenomper' => $this->faker->firstName,
+            'email' => $this->faker->unique()->safeEmail,
+            'password' => bcrypt('password'),
+            'immat' => $this->faker->unique()->regexify('[A-Z0-9]{6}'),
+            'date_naissance' => $this->faker->date(),
+            'photo_profil' => 'https://picsum.photos/200', // URL d'une image aléatoire de Lorem Picsum (taille 200x200)
+            'grade' => $this->faker->randomLetter,
+            'CIN' => $this->faker->unique()->regexify('[0-9]{8}'),
+            'date_affectation' => $this->faker->date(),
+            'diplome' => $this->faker->word,
+            'lieu_naissance' => $this->faker->city,
+            'role_id' => $role->id,
         ];
     }
 }
