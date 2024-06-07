@@ -3,10 +3,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CongeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AbscenceController;
 use App\Http\Controllers\DirecteurController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PersonnelController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +30,15 @@ Route::group(['middleware' => 'web'], function () {
 // Routes accessibles uniquement au personnel
 
 Route::middleware(['auth', 'role:personnel'])->group(function () {
-    Route::get('/accueil', [PersonnelController::class, 'acceuil'])->name('accueil');
+    Route::get('/accueil', [PersonnelController::class, 'home'])->name('accueil');
     Route::get('/demande-conge', [CongeController::class, 'creation'])->name('demande.conge');
     Route::post('/demande-conge', [CongeController::class, 'demanderConge'])->name('demande.conge.submit');
     Route::delete('/demande-conge/{id}', [CongeController::class, 'supprimerDemandeConge'])->name('demande.conge.supprimer');
     Route::get('/mes-demandes-conge', [CongeController::class, 'listeDemandesUtilisateur'])->name('mes_demandes.conge');
-    Route::get('/absences', [AbscenceController::class, 'showpersonnelabsence'])->name('showabsper');
+    Route::get('/mesabs',[PersonnelController::class,'mesabsc'])->name('mesabsc');
+    Route::get('/justifier/{id}', [AbscenceController::class,'showJustifyForm'])->name('justifier');
+    Route::post('/justifier/{id}', [AbscenceController::class,'justify'])->name('justify');
+    Route::get('/notifications', [NotificationController::class,'index'])->name('notifications');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });
@@ -51,6 +55,11 @@ Route::middleware(['auth', 'role:directeur'])->group(function () {
     Route::put('/edit/{id}', [PersonnelController::class, 'update'])->name('update');
     Route::get('/create-directeur', [DirecteurController::class, 'create'])->name('directeur.create');
     Route::post('/store-directeur', [DirecteurController::class, 'store'])->name('directeur.store');
+    Route::get('/abscences/{id}/download', [AbscenceController::class, 'downloadJustification'])->name('downloadJustification');
+    Route::post('/abscences/{id}/change-type', [AbscenceController::class, 'changeAbscenceType'])->name('changeAbscenceType');
+    Route::get('/notifications', [NotificationController::class, 'index2'])->name('notifications.index');
+    Route::get('/notifications/all', [NotificationController::class, 'all'])->name('notifications.all');
+    Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 

@@ -42,6 +42,29 @@
     <link rel="stylesheet" href="{{ URL::to('assets/css/toastr.min.css') }}">
     <script src="{{ URL::to('assets/js/toastr_jquery.min.js') }}"></script>
     <script src="{{ URL::to('assets/js/toastr.min.js') }}"></script>
+    <style>
+        .modal-dialog {
+        max-width: 900px; /* Définissez la largeur maximale du modal */
+        max-height: 900px;
+    }
+
+    .modal-content {
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(214, 138, 24, 0.3);
+        overflow-y: auto;
+    }
+
+    .modal-header {
+        background-color: #1a4736;
+        color: white;
+    }
+
+    .ajt{
+        background-color: #1a4736;
+    }
+
+
+    </style>
 </head>
 
 <body>
@@ -84,7 +107,7 @@
             </a>
             <!-- Header Title -->
             <div class="page-title-box">
-                <h3>Bienvenu, {{ Session::get('name') }}</h3>
+                <h3>Bienvenu, <strong>{{ Auth::user()->Nomper }} {{ Auth::user()->prenomper }} </strong></h3>
             </div>
             <!-- /Header Title -->
             <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
@@ -142,7 +165,7 @@
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="">Profile</a>
-                        <a class="dropdown-item" href="">Deconexion</a>
+                        <a class="dropdown-item" href="{{route('logout')}}">Deconexion</a>
                     </div>
                 </li>
             </ul>
@@ -196,6 +219,9 @@
     <script src="{{ URL::to('assets/js/multiselect.min.js') }}"></script>
     <!-- Custom JS -->
     <script src="{{ URL::to('assets/js/app.js') }}"></script>
+    <!-- ====== ionicons ======= -->
+    <script src="{{ asset('https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js')}}"></script>
+    <script  src="{{ asset('https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js')}}"></script>
     @yield('script')
 </body>
 

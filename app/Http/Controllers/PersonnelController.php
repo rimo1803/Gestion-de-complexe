@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\abscence;
 use App\Models\personnel;
+use App\Models\mission;
+use App\Models\conge;
+use App\Models\Attestation;
+use App\Models\AttestationSalaire;
+use App\Models\AttestationTravail;
+
+
 use Illuminate\Http\Request;
 
 use App\Exports\PersonnelExport;
@@ -22,23 +29,6 @@ class PersonnelController extends Controller
     {
         return view('Accueil_directeur.create');
 
-    }
-    public function login(Request $request)
-    {
-        // Vérifiez les informations d'identification de l'utilisateur
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            // Récupérez l'utilisateur authentifié
-            $user = Auth::user();
-            // Redirigez en fonction du rôle de l'utilisateur
-            if ($user->hasRole('directeur')) { // Correction ici : 'directeur' au lieu de 'director'
-                return redirect()->route('layouts.mainadmin');
-            } elseif ($user->hasRole('normal_user')) {
-                return redirect()->route('layouts.mainuser');
-            }
-        }
-
-        // Redirection en cas d'échec de l'authentification
-        return redirect()->back()->withInput()->withErrors(['email' => 'Email ou mot de passe incorrect']);
     }
 
 
@@ -79,7 +69,7 @@ public function store(Request $request)
         $personnel->date_affectation = $request->date_affectation;
         $personnel->diplome = $request->diplome;
         $personnel->lieu_naissance = $request->lieu_naissance;
-        $personnel->role_id = $request->role_id;
+        $personnel->role= $request->role;
         $personnel->status = $request->status;
 
         // Gestion du téléchargement de la photo de profil
@@ -100,13 +90,6 @@ public function store(Request $request)
         return back()->withInput()->withErrors(['error' => 'Une erreur est survenue lors de la création du personnel. Veuillez réessayer.']);
     }
 }
-    public function showpersonnelabsence($id)
-    {
-        $personnels = personnel::findOrFail($id);
-        $absences = $personnels->absences;
-
-        return view('Accueil_personnel.abscence', compact('personnels', 'absences'));
-    }
 
 
     public function showProfile($id)
@@ -152,6 +135,31 @@ public function store(Request $request)
     /**
     * @return \Illuminate\Support\Collection
     */
-    //Importation Excel
+    public function home()
+    {
+        $user = Auth::user();
+
+        if ($user->role === 'personnel') {
+            $absencesCount = abscence::where('immat_per', $user->immat)->count();
+            $nonJustifiedAbscencesCount = abscence::where('immat_per', $user->immat)->whereNull('justification')->count();
+            $missionsCount = Mission::where('personnel_id', $user->id)->count();
+            $congesCount = Conge::where('personnel_id', $user->id)->count();
+            $workAttestations = Attestation::where('personnel_id', $user->id)->where('type_attestation', 'travail')->get();
+            $salaryAttestations = Attestation::where('personnel_id', $user->id)->where('type_attestation', 'salaire')->get();
+
+            return view('Accueil_personnel.home', compact('absencesCount','nonJustifiedAbscencesCount', 'missionsCount', 'congesCount', 'workAttestations', 'salaryAttestations'));
+
+        }
 }
+
+
+    //affichage des abscences
+    public function mesabsc(){
+        $user = Auth::user();
+        $abscences = abscence::where('immat_per', $user->immat)->get();
+        return view('Accueil_personnel.mesabsc', compact('abscences'));
+    }
+    
+}
+
 

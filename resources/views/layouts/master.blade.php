@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="{{ URL::to('assets/css/style.css') }}">
     {{-- message toastr --}}
     <link rel="stylesheet" href="{{ URL::to('assets/css/toastr.min.css') }}">
+
     <script src="{{ URL::to('assets/js/toastr_jquery.min.js') }}"></script>
     <script src="{{ URL::to('assets/js/toastr.min.js') }}"></script>
 </head>
@@ -82,7 +83,8 @@
             </a>
             <!-- Header Title -->
             <div class="page-title-box">
-                <h3>Bienvenu, {{ Session::get('name') }}</h3>
+
+                <h3>Bienvenu, <strong>{{ Auth::user()->Nomper }} {{ Auth::user()->prenomper }} </strong></h3>
             </div>
             <!-- /Header Title -->
             <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
@@ -101,23 +103,37 @@
                     </div>
                 </li>
                 <!-- /Search -->
-                <!-- Notifications -->
-                <li class="nav-item dropdown">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <i class="fa fa-bell-o"></i>
-                        <span class="badge badge-pill">3</span>
-                    </a>
-                    <div class="dropdown-menu notifications">
-                        <div class="topnav-dropdown-header">
-                            <span class="notification-title">Notifications</span>
-                            <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
-                        </div>
-
-                        <div class="topnav-dropdown-footer"> <a href="activities.html">View all Notifications</a>
-                        </div>
+               <!-- Notifications -->
+               @if (isset($directeurNotifications) && $directeurNotifications->isNotEmpty())
+<li class="nav-item dropdown">
+    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+        <i class="fa fa-bell-o"></i>
+        <span class="badge badge-pill">{{ $directeurNotifications->count() }}</span> <!-- Nombre de notifications -->
+    </a>
+    <div class="dropdown-menu notifications">
+        <div class="topnav-dropdown-header">
+            <span class="notification-title">Notifications</span>
+            <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+        </div>
+        <div class="topnav-dropdown-footer">
+            <!-- Boucle sur les deux premières notifications -->
+            @foreach ($directeurNotifications as $notification)
+                <a href="{{ route('viewNotification', ['id' => $notification->id]) }}" class="notification-item">
+                    <div class="notification-content">
+                        <span class="notification-text">{{ $notification->data['message'] }}</span>
+                        <span class="notification-time">{{ $notification->created_at->diffForHumans() }}</span>
                     </div>
-                </li>
-                <!-- /Notifications -->
+                </a>
+            @endforeach
+            <!-- Fin de la boucle -->
+            @if ($directeurNotifications->count() > 2)
+                <a href="{{ route('allNotifications') }}" class="view-all">Voir toutes les notifications</a>
+            @endif
+        </div>
+    </div>
+</li>
+@endif
+<!-- /Notifications -->
 
                 <!-- Message Notifications -->
                 <li class="nav-item dropdown">
@@ -194,7 +210,15 @@
     <script src="{{ URL::to('assets/js/multiselect.min.js') }}"></script>
     <!-- Custom JS -->
     <script src="{{ URL::to('assets/js/app.js') }}"></script>
-    @yield('script')
+    <!-- =========== Scripts =========  -->
+    <script src="{{ asset('assets/js/main.js')}}"></script>
+     <!-- ======= Charts JS ====== -->
+     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+     <script src="{{ asset('assets/js/chartsJS.js')}}"></script>
+
+    <!-- ====== ionicons ======= -->
+    <script src="{{ asset('https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js')}}"></script>
+    <script  src="{{ asset('https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js')}}"></script>
 </body>
 
 </html>

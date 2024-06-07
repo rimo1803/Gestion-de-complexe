@@ -27,7 +27,8 @@ return [
     | Supported Drivers: "local", "ftp", "sftp", "s3"
     |
     */
-    'disks' => [
+    'disks' =>
+    [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
@@ -55,6 +56,11 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
         ],
+
+        'local' => [
+        'driver' => 'local',
+        'root' => storage_path('app'),
+    ],
 
     ],
 

@@ -31,6 +31,7 @@
                                         <th>CIN</th>
                                         <th>Diplome</th>
                                         <th>Date Affectaion</th>
+                                        <th>Status</th>
                                         <th> Actions</th>
                                     </tr>
                                 </thead>
@@ -43,6 +44,7 @@
                                             <td>{{ $personnel->CIN }}</td>
                                             <td>{{ $personnel->diplome }}</td>
                                             <td>{{ $personnel->date_affectation }}</td>
+                                            <td> {{ $personnel->status }}</td>
                                             <td class="d-flex justify-content-center align-items-center">
                                                 <a href="{{ route('profile', ['id' => $personnel->immat]) }}"
                                                     class="btn btn-sm mx-2" style="background-color:blue;color:white">
@@ -75,6 +77,7 @@
                                                     </svg>
                                                 </a>
                                             </td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>
