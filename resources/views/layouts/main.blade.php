@@ -61,6 +61,7 @@
 
     .ajt{
         background-color: #1a4736;
+        color: white;
     }
 
 

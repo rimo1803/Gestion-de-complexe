@@ -19,6 +19,8 @@ class AttestationSalaire extends Model
         'salary',
         'currency',
         'salary_date',
+        'document',
+
     ];
 
     /**
