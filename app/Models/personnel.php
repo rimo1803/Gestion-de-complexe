@@ -64,7 +64,10 @@ class Personnel extends Authenticatable
     {
         return $this->hasMany(Attestation::class);
     }
-
+    public function isDirecteur()
+    {
+        return $this->role === 'directeur';
+    }
 
 
 }

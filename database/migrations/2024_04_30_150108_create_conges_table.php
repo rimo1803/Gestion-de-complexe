@@ -20,7 +20,7 @@ class CreateCongesTable extends Migration
             $table->string('decision_conge')->nullable(); // Chemin du fichier de décision
             $table->string('status')->default('en attente');
             $table->integer('reliquat');
-            $table->string('remplacement');
+            $table->string('remplacement')->nullable();;
         });
     }
 

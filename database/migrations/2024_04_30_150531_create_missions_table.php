@@ -13,7 +13,6 @@ class CreateMissionsTable extends Migration
     {
         Schema::create('missions', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->date('date_debut_mission');
             $table->date('date_fin_mission');
             $table->time('heure_debut');
@@ -22,6 +21,8 @@ class CreateMissionsTable extends Migration
             $table->string('objet');
             $table->string('immat_pers');
             $table->foreignId('personnel_id')->constrained('personnels');
+            $table->foreignId('moyen_transport_id')->nullable()->constrained('moyen_transports');
+            $table->timestamps();
         });
     }
 
@@ -32,4 +33,4 @@ class CreateMissionsTable extends Migration
     {
         Schema::dropIfExists('missions');
     }
-};
+}

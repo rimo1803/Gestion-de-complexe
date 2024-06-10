@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\abscence;
 use App\Models\personnel;
 use Illuminate\Http\Request;
-
+use Illuminate\Validation\Rule;
 use App\Exports\PersonnelExport;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -41,65 +41,64 @@ class PersonnelController extends Controller
         return redirect()->back()->withInput()->withErrors(['email' => 'Email ou mot de passe incorrect']);
     }
 
+    public function store(Request $request)
+    {
+        Log::info('Début de la méthode store du PersonnelController.');
 
-// fonction store
-public function store(Request $request)
-{
-    Log::info('Début de la méthode store du PersonnelController.');
+        $validated = $request->validate([
+            'Nomper' => ['required'],
+            'prenomper' => ['required'],
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+            'immat' => ['required'],
+            'date_naissance' => ['required', 'date'],
+            'grade' => ['required'],
+            'CIN' => ['required'],
+            'date_affectation' => ['required', 'date'],
+            'diplome' => ['required'],
+            'lieu_naissance' => ['required'],
+            'photo_profil' => ['required', 'file'],
+            'role' => ['required', Rule::in(['personnel', 'directeur'])],
+            'status' => ['required'],  // Ajout de la validation pour le champ status
+        ]);
 
-    $validated = $request->validate([
-        'Nomper' => ['required'],
-        'prenomper' => ['required'],
-        'email' => ['required', 'email'],
-        'password' => ['required'],
-        'immat' => ['required'],
-        'date_naissance' => ['required', 'date'],
-        'grade' => ['required'],
-        'CIN' => ['required'],
-        'date_affectation' => ['required', 'date'],
-        'diplome' => ['required'],
-        'lieu_naissance' => ['required'],
-        'photo_profil' => ['required', 'file'],
-        'role_id' => ['required', 'exists:roles,id'],
-        'status' => ['required'],  // Ajout de la validation pour le champ status
-    ]);
+        Log::info('Validation des champs réussie.');
 
-    Log::info('Validation des champs réussie.');
+        try {
+            $personnel = new Personnel();
+            $personnel->Nomper = $request->Nomper;
+            $personnel->prenomper = $request->prenomper;
+            $personnel->email = $request->email;
+            $personnel->password = Hash::make($request->password);
+            $personnel->immat = $request->immat;
+            $personnel->date_naissance = $request->date_naissance;
+            $personnel->grade = $request->grade;
+            $personnel->CIN = $request->CIN;
+            $personnel->date_affectation = $request->date_affectation;
+            $personnel->diplome = $request->diplome;
+            $personnel->lieu_naissance = $request->lieu_naissance;
+            $personnel->role = $request->role; // Utilisation du champ role
+            $personnel->status = $request->status;
 
-    try {
-        $personnel = new Personnel();
-        $personnel->Nomper = $request->Nomper;
-        $personnel->prenomper = $request->prenomper;
-        $personnel->email = $request->email;
-        $personnel->password = Hash::make($request->password);
-        $personnel->immat = $request->immat;
-        $personnel->date_naissance = $request->date_naissance;
-        $personnel->grade = $request->grade;
-        $personnel->CIN = $request->CIN;
-        $personnel->date_affectation = $request->date_affectation;
-        $personnel->diplome = $request->diplome;
-        $personnel->lieu_naissance = $request->lieu_naissance;
-        $personnel->role_id = $request->role_id;
-        $personnel->status = $request->status;
+            // Gestion du téléchargement de la photo de profil
+            if ($request->hasFile('photo_profil')) {
+                $profile_picture = $request->file('photo_profil');
+                $profile_picture_name = time() . '_' . $profile_picture->getClientOriginalName();
+                $profile_picture->move(public_path('profile_pictures'), $profile_picture_name);
+                $personnel->photo_profil = $profile_picture_name;
+                Log::info('Téléchargement de la photo de profil réussi.');
+            }
 
-        // Gestion du téléchargement de la photo de profil
-        if ($request->hasFile('photo_profil')) {
-            $profile_picture = $request->file('photo_profil');
-            $profile_picture_name = time() . '_' . $profile_picture->getClientOriginalName();
-            $profile_picture->move(public_path('profile_pictures'), $profile_picture_name);
-            $personnel->photo_profil = $profile_picture_name;
-            Log::info('Téléchargement de la photo de profil réussi.');
+            $personnel->save();
+            Log::info('Personnel créé avec succès.');
+
+            return redirect('/')->with('success', 'Personnel créé avec succès');
+        } catch (\Exception $e) {
+            Log::error('Erreur lors de la création du personnel: ' . $e->getMessage());
+            return back()->withInput()->withErrors(['error' => 'Une erreur est survenue lors de la création du personnel. Veuillez réessayer.']);
         }
-
-        $personnel->save();
-        Log::info('Personnel créé avec succès.');
-
-        return redirect('/')->with('success', 'Personnel créé avec succès');
-    } catch (\Exception $e) {
-        Log::error('Erreur lors de la création du personnel: ' . $e->getMessage());
-        return back()->withInput()->withErrors(['error' => 'Une erreur est survenue lors de la création du personnel. Veuillez réessayer.']);
     }
-}
+
     public function showpersonnelabsence($id)
     {
         $personnels = personnel::findOrFail($id);
@@ -146,6 +145,10 @@ public function store(Request $request)
             "success" => "Employe updated successfully"
         ]);
         return redirect('/')->with('success', 'Personnel mis à jour avec succès.');
+    }
+    public function isDirecteur()
+    {
+        return $this->role === 'directeur';
     }
 
 
