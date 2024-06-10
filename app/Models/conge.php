@@ -16,4 +16,11 @@ class conge extends Model
     {
         return $this->belongsTo(Personnel::class);
     }
+    public function calculateReliquat()
+    {
+        $dateDebut = Carbon::parse($this->date_debut);
+        $dateFin = Carbon::parse($this->date_fin);
+        return $dateFin->diffInDays($dateDebut);
+    }
 }
+

@@ -2,20 +2,16 @@
 
 namespace Database\Factories;
 
-use App\Models\personnel;
+use App\Models\Mission;
+use App\Models\MoyenTransport;
+use App\Models\Personnel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\mission>
- */
 class MissionFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected $model = Mission::class;
+
+    public function definition()
     {
         return [
             'date_debut_mission' => $this->faker->date(),
@@ -24,10 +20,9 @@ class MissionFactory extends Factory
             'heure_fin' => $this->faker->time(),
             'destination' => $this->faker->address,
             'objet' => $this->faker->sentence,
-            'immat_pers' => function () {
-                // Sélectionner une immatriculation aléatoire parmi les personnels existants
-                return personnel::all()->random()->immat;
-            },
+            'immat_pers' => $this->faker->regexify('[A-Z0-9]{6}'),
+            'personnel_id' => Personnel::factory(),
+            'moyen_transport_id' => MoyenTransport::factory(),
         ];
     }
 }

@@ -30,15 +30,12 @@ Route::group(['middleware' => 'web'], function () {
 // Routes accessibles uniquement au personnel
 
 Route::middleware(['auth', 'role:personnel'])->group(function () {
-    Route::get('/accueil', [PersonnelController::class, 'home'])->name('accueil');
+    Route::get('/accueil', [PersonnelController::class, 'acceuil'])->name('accueil');
     Route::get('/demande-conge', [CongeController::class, 'creation'])->name('demande.conge');
     Route::post('/demande-conge', [CongeController::class, 'demanderConge'])->name('demande.conge.submit');
     Route::delete('/demande-conge/{id}', [CongeController::class, 'supprimerDemandeConge'])->name('demande.conge.supprimer');
     Route::get('/mes-demandes-conge', [CongeController::class, 'listeDemandesUtilisateur'])->name('mes_demandes.conge');
-    Route::get('/mesabs',[PersonnelController::class,'mesabsc'])->name('mesabsc');
-    Route::get('/justifier/{id}', [AbscenceController::class,'showJustifyForm'])->name('justifier');
-    Route::post('/justifier/{id}', [AbscenceController::class,'justify'])->name('justify');
-    Route::get('/notifications', [NotificationController::class,'index'])->name('notifications');
+    Route::get('/absences', [AbscenceController::class, 'showpersonnelabsence'])->name('showabsper');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });
@@ -66,8 +63,34 @@ Route::middleware(['auth', 'role:directeur'])->group(function () {
 });
 
 
+Route::middleware(['auth','role:directeur'])->group(function () {
+    Route::resource('conges', CongeController::class)->except(['show']);
+    Route::post('conges/{conge}/decision', [CongeController::class, 'decision'])->name('conges.decision');
+    Route::get('conges/{conge}/download', [CongeController::class, 'downloadDecision'])->name('conges.download');
+    Route::get('conges/pending', [CongeController::class, 'showPendingRequests'])->name('conges.pending');
+   Route::post('/conges/edit/{id}', [CongeController::class, 'update'])->name('update');
+   Route::put('/conges/{conge}', 'App\Http\Controllers\CongeController@update')->name('conges.update');
+   Route::prefix('missions')->name('missions.')->group(function () {
+    Route::get('/', [MissionController::class, 'index'])->name('index');
+    Route::get('/create', [MissionController::class, 'create'])->name('create');
+    Route::post('/', [MissionController::class, 'store'])->name('store');
+    Route::get('/{mission}/edit', [MissionController::class, 'edit'])->name('edit');
+    Route::put('/{mission}', [MissionController::class, 'update'])->name('update');
+    Route::get('/{mission}/download-pdf', [MissionController::class, 'downloadPDF'])->name('downloadPDF');
+}) ;});
 
 
+Route::middleware(['auth'])->group(function () {
+
+    Route::middleware('role:personnel')->group(function () {
+        Route::get('/mission', [MissionController::class, 'personnelMissions'])->name('missions.personnelMissions');
+        Route::get('/missions/{mission}/fill-transport-form', [MissionController::class, 'fillTransportForm'])->name('missions.fillTransportForm');
+        Route::post('/missions/{mission}/fill-transport-form', [MissionController::class, 'storeTransportForm'])->name('missions.storeTransportForm');
+        Route::get('/missions/{mission}/download-mission-order', [MissionController::class, 'downloadMissionOrder'])->name('missions.downloadMissionOrder');
+    });
+
+
+});
 
 
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use Illuminate\Database\Seeder;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -14,7 +15,7 @@ use App\Models\MoyenTransport;
 use App\Models\organisme;
 use App\Models\personnel;
 
-use Illuminate\Database\Seeder;
+
 
 
 class DatabaseSeeder extends Seeder
@@ -24,6 +25,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+
+        $this->call([
+
+            MissionsTableSeeder::class,  ]);
          // Seed pour la table 'personnels'
          \App\Models\Personnel::factory()->count(18)->create();
 

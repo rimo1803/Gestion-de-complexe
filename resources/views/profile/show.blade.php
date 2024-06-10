@@ -89,7 +89,7 @@ h1 {
 
 .input1, .input2 {
     flex: 1; /* Les deux éléments occupent la même largeur */
-    
+
     gap: 100px;
 }
 
@@ -196,8 +196,8 @@ h1 {
                 </div>
 
                 <div class="form-group">
-                    <label for="role_id">Role</label>
-                    <input type="text" name="role_id" class="form-control" value="{{ $personnel->role->name }}" disabled>
+                    <label for="role">Rôle:</label>
+                    <input type="text" name="role" class="form-control" value="{{ $personnel->role }}" disabled>
                 </div>
 
                 <div class="form-group">

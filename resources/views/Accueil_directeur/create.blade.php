@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>/* Style pour le formulaire utilisateur */
+    <style>
         .user-form {
             max-width: 800px;
             margin: 0 auto;
@@ -189,13 +189,13 @@
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label for="role_id">Rôle:</label>
-                    <select name="role_id" id="role_id" required>
+                    <label for="role">Rôle:</label>
+                    <select name="role" id="role" required>
                         <option value="">Sélectionnez un rôle</option>
-                        <option value="1" {{ old('role_id') == 1 ? 'selected' : '' }}>Directeur</option>
-                        <option value="2" {{ old('role_id') == 2 ? 'selected' : '' }}>Utilisateur normal</option>
+                        <option value="directeur" {{ old('role') == 'directeur' ? 'selected' : '' }}>Directeur</option>
+                        <option value="personnel" {{ old('role') == 'personnel' ? 'selected' : '' }}>Utilisateur normal</option>
                     </select>
-                    @error('role_id')
+                    @error('role')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
@@ -206,9 +206,10 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+                <button type="submit" class="btn-submit">Créer Utilisateur</button>
             </div>
 
-            <button type="submit" class="btn-submit">Créer Utilisateur</button>
+
         </form>
         @if ($errors->any())
             <div class="alert alert-danger">
