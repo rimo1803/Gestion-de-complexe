@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AbscenceController;
 use App\Http\Controllers\DirecteurController;
 use App\Http\Controllers\PersonnelController;
+use App\Http\Controllers\AttestationController;
 use App\Http\Controllers\NotificationController;
 
 /*
@@ -37,6 +38,14 @@ Route::middleware(['auth', 'role:personnel'])->group(function () {
     Route::delete('/demande-conge/{id}', [CongeController::class, 'supprimerDemandeConge'])->name('demande.conge.supprimer');
     Route::get('/mes-demandes-conge', [CongeController::class, 'listeDemandesUtilisateur'])->name('mes_demandes.conge');
     Route::get('/absences', [AbscenceController::class, 'showpersonnelabsence'])->name('showabsper');
+    Route::get('/mesabs',[PersonnelController::class,'mesabsc'])->name('mesabsc');
+    Route::get('/justifier/{id}', [AbscenceController::class,'showJustifyForm'])->name('justifier');
+    Route::post('/justifier/{id}', [AbscenceController::class,'justify'])->name('justify');
+    Route::get('/notifications', [NotificationController::class,'index'])->name('notifications');
+    Route::get('/attestations', [AttestationController::class, 'index'])->name('attestations.index');
+    Route::get('/attestations/{attestation}/download', [AttestationController::class, 'download'])->name('attestations.download');
+    Route::get('/attestations/create', [AttestationController::class, 'create'])->name('attestations.create');
+    Route::post('/attestations', [AttestationController::class, 'store'])->name('attestations.store');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });
@@ -56,11 +65,9 @@ Route::middleware(['auth', 'role:directeur'])->group(function () {
     Route::get('/abscences/{id}/download', [AbscenceController::class, 'downloadJustification'])->name('downloadJustification');
     Route::post('/abscences/{id}/change-type', [AbscenceController::class, 'changeAbscenceType'])->name('changeAbscenceType');
     Route::get('/notifications', [NotificationController::class, 'index2'])->name('notifications.index');
-    Route::get('/notifications/all', [NotificationController::class, 'all'])->name('notifications.all');
-    Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
+    Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notification.show');
+    Route::post('/notifications/{id}/markAsRead', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
-
 });
 
 

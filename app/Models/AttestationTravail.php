@@ -14,6 +14,7 @@ class AttestationTravail extends Model
         'department',
         'date_start',
         'date_end',
+        'document',
     ];
 
     public function attestation()
