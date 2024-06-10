@@ -33,6 +33,7 @@ Route::middleware(['auth', 'role:personnel'])->group(function () {
     Route::get('/accueil', [PersonnelController::class, 'acceuil'])->name('accueil');
     Route::get('/demande-conge', [CongeController::class, 'creation'])->name('demande.conge');
     Route::post('/demande-conge', [CongeController::class, 'demanderConge'])->name('demande.conge.submit');
+    Route::get('/mesabs',[PersonnelController::class,'mesabsc'])->name('mesabsc');
     Route::delete('/demande-conge/{id}', [CongeController::class, 'supprimerDemandeConge'])->name('demande.conge.supprimer');
     Route::get('/mes-demandes-conge', [CongeController::class, 'listeDemandesUtilisateur'])->name('mes_demandes.conge');
     Route::get('/absences', [AbscenceController::class, 'showpersonnelabsence'])->name('showabsper');
