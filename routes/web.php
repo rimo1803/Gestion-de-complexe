@@ -11,9 +11,7 @@ use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\AttestationController;
 use App\Http\Controllers\AttestationTravailController;
 use App\Http\Controllers\NotificationController;
-
 use App\Http\Controllers\PasswordController;
-
 use App\Models\AttestationTravail;
 
 
@@ -126,6 +124,10 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+
+
+
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 });
@@ -134,7 +136,6 @@ Route::get('/generate-pdf', [PDFController::class, 'generatePDF'])->name('pdf');
 
 
 Route::get('/export', [PersonnelController::class, 'export'])->name('export');
-
 
 
 Route::middleware(['auth'])->group(function () {
