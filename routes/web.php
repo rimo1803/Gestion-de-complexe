@@ -8,7 +8,9 @@ use App\Http\Controllers\AbscenceController;
 use App\Http\Controllers\DirecteurController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\AttestationController;
+use App\Http\Controllers\AttestationTravailController;
 use App\Http\Controllers\NotificationController;
+use App\Models\AttestationTravail;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,14 +42,19 @@ Route::middleware(['auth', 'role:personnel'])->group(function () {
     Route::get('/justifier/{id}', [AbscenceController::class,'showJustifyForm'])->name('justifier');
     Route::post('/justifier/{id}', [AbscenceController::class,'justify'])->name('justify');
     Route::get('/notifications', [NotificationController::class,'index'])->name('notifications');
-    Route::get('/attestations', [AttestationController::class, 'index'])->name('attestations.index');
-    Route::get('/attestations/{attestation}/download', [AttestationController::class, 'download'])->name('attestations.download');
-    Route::get('/attestations/create', [AttestationController::class, 'create'])->name('attestations.create');
-    Route::post('/attestations', [AttestationController::class, 'store'])->name('attestations.store');
+    //route pour afficher mes attestation
+    Route::get('/attestationspersonnel', [AttestationController::class, 'index'])->name('mesattestation');
+    Route::get('/attestations/{id}', [AttestationController::class, 'download'])->name('attestations.download');
+    //route pour la demande d'une attestation
+    Route::get('/attestation/demande', [AttestationController::class, 'create'])->name('demandeattestation');
+    Route::post('/attestationsstore', [AttestationController::class, 'store'])->name('attestations.store');
+    //les routes de notifications
+    Route::get('/notifications', [NotificationController::class, 'index2'])->name('notifications.index');
+    Route::get('/notifications/{id}', [NotificationController::class, 'notif'])->name('notification.show');
+    Route::post('/notifications/{id}/markAsRead', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });
-
 // Routes accessibles uniquement aux directeurs
 Route::middleware(['auth', 'role:directeur'])->group(function () {
     Route::get('/accueildire', [DirecteurController::class, 'index'])->name('accueildire');
@@ -65,21 +72,15 @@ Route::middleware(['auth', 'role:directeur'])->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index2'])->name('notifications.index');
     Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notification.show');
     Route::post('/notifications/{id}/markAsRead', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
+    Route::get('/attestations', [AttestationController::class, 'affichage'])->name('attestations.index');
+    Route::get('/attestations/salaire/{id}', [AttestationController::class,'attestationSalaire'])->name('attestation.salaire');
+    Route::get('/attestations/travail/{id}', [AttestationController::class,'attestationTravail'])->name('attestation.travail');
+    Route::get('/attestation/{id}/pdf', [AttestationController::class, 'generatePDFtravail'])->name('generatePDFtravail');
+    Route::get('/attestation/{id}/refuse', [AttestationController::class, 'refuseAttestation'])->name('attestation.refuse');
+    Route::get('/attestation/{id}/pdf', [AttestationController::class, 'generatePDFsalaire'])->name('generatePDFsalaire');
+    Route::get('/attestation/{id}/refuse', [AttestationController::class, 'refuseAttestation'])->name('attestation.refuse');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 });
@@ -88,5 +89,6 @@ Route::get('/generate-pdf', [PDFController::class, 'generatePDF'])->name('pdf');
 
 
 Route::get('/export', [PersonnelController::class, 'export'])->name('export');
+
 
 
