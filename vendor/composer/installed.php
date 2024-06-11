@@ -3,11 +3,8 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-<<<<<<< HEAD
-        'reference' => '5b07edc219d396d0b19550d940ca7a49508a23e1',
-=======
         'reference' => '42dd9dc4bd01c19d3427d9bd4605d7da337c08a0',
->>>>>>> hafsa
+
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -422,11 +419,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-<<<<<<< HEAD
-            'reference' => '5b07edc219d396d0b19550d940ca7a49508a23e1',
-=======
             'reference' => '42dd9dc4bd01c19d3427d9bd4605d7da337c08a0',
->>>>>>> hafsa
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
