@@ -11,7 +11,6 @@ use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\AttestationController;
 use App\Http\Controllers\AttestationTravailController;
 use App\Http\Controllers\NotificationController;
-
 use App\Http\Controllers\PasswordController;
 use App\Models\AttestationTravail;
 
@@ -121,6 +120,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 });
+
 
 
 
