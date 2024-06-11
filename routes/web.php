@@ -36,7 +36,7 @@ Route::group(['middleware' => 'web'], function () {
 // Routes accessibles uniquement au personnel
 
 Route::middleware(['auth', 'role:personnel'])->group(function () {
-    Route::get('/accueil', [PersonnelController::class, 'acceuil'])->name('accueil');
+    Route::get('/accueil', [PersonnelController::class, 'home'])->name('accueil');
     Route::get('/demande-conge', [CongeController::class, 'creation'])->name('demande.conge');
     Route::post('/demande-conge', [CongeController::class, 'demanderConge'])->name('demande.conge.submit');
     Route::get('/mesabs',[PersonnelController::class,'mesabsc'])->name('mesabsc');
