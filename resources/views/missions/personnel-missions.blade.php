@@ -1,33 +1,33 @@
 @extends('layouts.main')
-
 @section('content')
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-<style>
-    .container{
-        padding: 100px;
-    }
-</style>
-
-    <div class="container">
-        <h1 style="align-items: center">Mes Missions</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="row my-5">
+            <div class="col-md-10 mx-auto">
+                <div class="card my-3">
+                    <div class="card-header">
+                        <h4 class="text-center">MES MISSIONS</h4>
+                    </div>
+                    <div class="card-body">
+                        <table id="myTable" class="table table-boredered table-striped">
         <ul class="list-group">
             @foreach ($missions as $mission)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     {{ $mission->destination }}
                     <div class="btn-group" role="group" aria-label="Actions">
-                        <a href="{{ route('missions.fillTransportForm', $mission->id) }}" class="btn btn-primary" >
-                            <i class="fas fa-truck"></i> Remplir le formulaire de transport
+                        <a href="{{ route('missions.fillTransportForm', $mission->id) }}" class="btn " style="background-color: rgb(127, 201, 127)">
+                            <i class="fas fa-truck"></i> Transport
                         </a>
-                        <a href="{{ route('missions.downloadMissionOrder', $mission->id) }}" class="btn btn-success" style="background-color: green">
-                            <i class="fas fa-download"></i> Télécharger l'ordre de mission
+                        <a href="{{ route('missions.downloadMissionOrder', $mission->id) }}" class="btn " style="background-color: green">
+                            <i class="fas fa-download"></i> Ordre de mission
                         </a>
                     </div>
                 </li>
             @endforeach
         </ul>
+                        </table>
     </div>
 @endsection
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
 

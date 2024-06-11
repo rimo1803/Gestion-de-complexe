@@ -1,155 +1,24 @@
 @extends('layouts.main')
-
 @section('content')
-<head><!-- Ajouter ces lignes dans la section <head> de votre vue -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+ <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="row my-5">
+                <div class="col-md-10 mx-auto">
+                    <div class="card my-3">
+                        <div class="card-header">
+                            <h4 class="text-center">MES CONGES</h4>
+                        </div>
+                        <a href="{{ route('conges.create') }}" style="color: #125715">
+                            <i class="la la-calendar-plus-o"></i> Créer une demande de congé
+                        </a>
 
-    <!-- Ajouter ces scripts avant la fermeture du tag </body> de votre vue -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <div class="card-body">
+            <table id="myTable" class="table table-boredered table-striped">
+                <thead>
+                    <tr>
 
 
-    <style>/* Ajoutez ces styles à votre fichier de style CSS */
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 75px;
-            padding-top: 85px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .table th,
-        .table td {
-            padding: 12px;
-            text-align: center;
-        }
-
-        .table th {
-            background-color: #125715;
-        }
-
-        .btn {
-            padding: 8px 16px;
-            border: none;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            color: #fff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            color: #fff;
-        }
-
-        .btn-danger:hover {
-            background-color: #c82333;
-        }
-
-        .btn-success {
-            background-color: #28a745;
-            color: #fff;
-        }
-
-        .btn-success:hover {
-            background-color: #218838;
-        }
-
-        .modal-dialog {
-            max-width: 600px;
-        }
-
-        .modal-content {
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .modal-header {
-            background-color: #258508;
-            color: #fff;
-            border-radius: 5px 5px 0 0;
-        }
-
-        .modal-title {
-            margin: 0;
-            padding: 16px;
-            font-size: 1.25rem;
-        }
-
-        .modal-body {
-            padding: 16px;
-        }
-
-        .modal-footer {
-            padding: 16px;
-            border-top: 1px solid #e9ecef;
-            border-radius: 0 0 5px 5px;
-        }
-
-        .close {
-            color: #fff;
-            opacity: 0.5;
-        }
-
-        .close:hover {
-            opacity: 0.75;
-        }
-        h1{
-            align-content: center;
-            align-items: center;
-        }
-
-        </style>
-    </head>
-<body>
-
-    <div class="container">
-        <h1>Mes Congés</h1>
-        <a href="{{ route('conges.create') }}" style="color: #125715">Créer une demande de congé</a>
-
-        <table class="table">
-            <thead>
-                <tr>
                     <th>Date de début</th>
                     <th>Date de fin</th>
                     <th>Status</th>
@@ -164,9 +33,14 @@
                     <td>{{ $conge->status }}</td>
                     <td>
                         @if ($conge->status == 'en attente')
-                        <a href="#" class="btn btn-primary edit-conge" style="background-color: #218838" data-conge-id="{{ $conge->id }}" data-toggle="modal" data-target="#editStudentModal{{$conge->id}}">Modifier</a>
+                        <a href="#" class="btn edit-conge" style="background-color: #218838; color: rgb(9, 9, 9)" data-conge-id="{{ $conge->id }}" data-toggle="modal" data-target="#editStudentModal{{$conge->id}}">
+                            <i class="fas fa-edit"></i> Modifier
+                        </a>
 
-                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $conge->id }}">Supprimer</a>
+                        <a href="#" class="btn btn-danger" style="color: black" data-toggle="modal" data-target="#deleteModal{{ $conge->id }}">
+                            <i class="fas fa-trash-alt"></i> Supprimer
+                        </a>
+
                     @elseif ($conge->status == 'acceptée' && $conge->decision_conge)
                         <a href="{{ route('conges.download', $conge) }}" class="btn btn-success">Télécharger décision</a>
                     @endif
@@ -236,7 +110,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" style="background-color: #125715"><i class="fas fa-save"></i> Save Changes</button>
+                        <button type="submit" class="btn " style="background-color: #125715"><i class="fas fa-save"></i> Save Changes</button>
                     </div>
                 </form>
             </div>

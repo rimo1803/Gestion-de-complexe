@@ -5,120 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Profile</title>
-    <style>
+   <style>/* Styles généraux pour la page de profil */
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+    }
 
-      body {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #f8f9fa;
-    font-family: Arial, sans-serif;
-}
+    .card {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
 
-.container {
-    margin: 110px 10px 0 10px;
-    max-width: 600px;
-    width: 100%;
-}
+    .card-header {
+        background-color: #125715;
+        color: white;
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
 
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #343a40;
-}
+    .card-header h1 {
+        margin: 0;
+        font-size: 24px;
+    }
 
-.card {
-    background-color: #ffffff;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-left: 200px
-}
+    .card-body {
+        padding: 20px;
+    }
 
-.card-header {
-    background-color: #007bff;
-    color: #ffffff;
-    padding: 10px 20px;
-    border-bottom: 1px solid #dee2e6;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
+    .profile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
 
+    .user-detail {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
 
-.card-body {
-    padding: 20px;
+    .input1, .input2 {
+        flex: 1;
+        min-width: 200px;
+    }
 
-    align-items: center;
-   width: 800px;
-   justify-content: flex-end;
-   align-items: center;
+    .form-group {
+        margin-bottom: 15px;
+    }
 
-}
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
 
-.profile-image {
-    width: 100px;
-    height: 100px;
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
 
-    object-fit: cover;
-    border: 3px solid #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-
-.form-group {
-    margin-bottom: 15px;
-    width: 100px;
-}
-
-.form-group label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-    color: #495057;
-    width: 200px;
-}
-.user-detail {
-    display: flex; /* Utiliser flexbox */
-    gap: 120px;
-    align-items: center;
-
-}
-
-.input1, .input2 {
-    flex: 1; /* Les deux éléments occupent la même largeur */
-
-    gap: 100px;
-}
-
-.input1 {
-    margin-right: 10px; /* Ajouter une marge à droite pour séparer les éléments */
-}
-
-.form-group input {
-    width: calc(100% - 20px);
-
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    font-size: 16px;
-    color: #495057;
-    width: 300px;
-
-}
-.form-group.flex {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; /* Pour espacer les éléments */
-    align-items: center; /* Pour aligner verticalement les éléments */
-}
-
-.form-group.flex .form-control {
-    width: 48%; /* Ajustez la largeur selon vos préférences */
-}
-
-
+    .form-control[disabled] {
+        background-color: #f0f0f0;
+        color: #888;
+    }
     </style>
 </head>
 <body>
@@ -128,8 +87,6 @@ h1 {
     @section('content')
 
         <div class="container">
-
-
         <div class="card">
             <div class="card-header">
                 <h1>Profile</h1>
@@ -137,7 +94,7 @@ h1 {
             <div class="card-body">
 
                 @if(auth()->check() && auth()->user()->photo_profil)
-                    <img src="{{ asset('storage/profile_pictures/'.basename(auth()->user()->photo_profil)) }}" alt="Photo de Profil" class="profile-image">
+                    <img src="{{ asset('images\WhatsApp Image 2024-05-02 à 14.58.58_76d8c627.jpg')}}" alt="Photo de Profil" class="profile-image">
                 @else
                     <img src="{{ asset('images/placeholder.jpg') }}" alt="Photo de Profil">
                 @endif
