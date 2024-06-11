@@ -28,6 +28,6 @@ class AttestationSalaire extends Model
      */
     public function attestation()
     {
-        return $this->belongsTo(Attestation::class);
+        return $this->belongsTo(Attestation::class,'attestation_id');
     }
 }

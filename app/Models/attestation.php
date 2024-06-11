@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\personnel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Attestation extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'description', 'type_attestation', 'date_edition', 'reference', 'personnel_id', 'document'
+        'description', 'type_attestation', 'date_edition', 'reference', 'personnel_id', 'document','status',
     ];
 
     public function travail()
@@ -21,5 +22,9 @@ class Attestation extends Model
     public function salaire()
     {
         return $this->hasOne(AttestationSalaire::class);
+    }
+    public function personnel()
+    {
+        return $this->belongsTo(personnel::class);
     }
 }

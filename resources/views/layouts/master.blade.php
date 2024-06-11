@@ -10,6 +10,7 @@
     <meta name="author" content="SoengSouy Admin Template">
     <meta name="robots" content="noindex, nofollow">
     <title>HR-Innovations</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- DataTable -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -48,6 +49,10 @@
         .invalid-feedback {
             font-size: 14px;
         }
+        .ajt{
+        background-color: #3f7e66;
+        color: white;
+    }
     </style>
     <!-- Main Wrapper -->
     <div class="main-wrapper">
@@ -171,6 +176,7 @@
     <script src="{{ URL::to('assets/js/app.js') }}"></script>
     <!-- =========== Scripts =========  -->
     <script src="{{ asset('assets/js/main.js')}}"></script>
+
      <!-- ======= Charts JS ====== -->
      <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
      <script src="{{ asset('assets/js/chartsJS.js')}}"></script>

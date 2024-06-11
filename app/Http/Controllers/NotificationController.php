@@ -26,6 +26,7 @@ class NotificationController extends Controller {
                 NouvelleJustificationDeposee::class,
                 NouvelleDemandeAttestation::class
             ])
+            ->whereNull('read_at') 
             ->latest()
             ->paginate(10);
         return view('Accueil_directeur.notification', compact('notifications'));

@@ -32,7 +32,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <a href="{{ route('attestations.create') }}" class="btn btn-success">Demander une Attestation</a>
+                            <a href="{{ route('demandeattestation') }}" class="btn btn-success">Demander une Attestation</a>
                         </div>
                     </div>
                 </div>

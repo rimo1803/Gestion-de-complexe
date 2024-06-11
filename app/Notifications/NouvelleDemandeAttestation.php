@@ -56,8 +56,8 @@ class NouvelleDemandeAttestation extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'attestation_id' => $this->attestation['id'], // Assurez-vous que cette clé correspond à l' de l'atestation
-            'description' => $this->attestation['description'], // ou toute autre clé utilisée pour stocker les informations sur l'attestation
+            'attestation_id' => $this->attestation['id'],
+            'description' => $this->attestation['description'],
             'type' => 'App\Notifications\NouvelleDemandeAttestation',
             'message' => 'Une nouvelle demande d\'attestation a été soumise.'
         ];
