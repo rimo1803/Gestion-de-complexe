@@ -1,3 +1,6 @@
+@extends('layouts.master')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,9 +82,7 @@
         </style>
 </head>
 <body>
-    @extends('layouts.master')
 
-    @section('content')
     <div class="container">
         <h1>Créer un utilisateur</h1>
         @if (session('success'))
@@ -121,6 +122,12 @@
                     @error('password')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="password_confirmation">Confirmer Mot de passe:</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" required>
                 </div>
             </div>
             <div class="form-row">
@@ -180,6 +187,25 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                    <label for="role">Rôle:</label>
+                    <select name="role" id="role" required>
+                        <option value="personnel" {{ old('role') == 'personnel' ? 'selected' : '' }}>Personnel</option>
+                        <option value="directeur" {{ old('role') == 'directeur' ? 'selected' : '' }}>Directeur</option>
+                    </select>
+                    @error('role')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="status">Statut:</label>
+                    <input type="text" name="status" id="status" value="{{ old('status') }}" required>
+                    @error('status')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
                     <label for="photo_profil">Photo de profil:</label>
                     <input type="file" name="photo_profil" id="photo_profil">
                     @error('photo_profil')
@@ -187,42 +213,9 @@
                     @enderror
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="role">Rôle:</label>
-                    <select name="role" id="role" required>
-                        <option value="">Sélectionnez un rôle</option>
-                        <option value="directeur" {{ old('role') == 'directeur' ? 'selected' : '' }}>Directeur</option>
-                        <option value="personnel" {{ old('role') == 'personnel' ? 'selected' : '' }}>Utilisateur normal</option>
-                    </select>
-                    @error('role')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="status">Status:</label>
-                    <input type="text" name="status" id="status" value="{{ old('status', 'active') }}" required>
-                    @error('status')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <button type="submit" class="btn-submit">Créer Utilisateur</button>
-            </div>
-
-
+            <button type="submit" class="btn-submit">Créer l'utilisateur</button>
         </form>
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
     </div>
     @endsection
-
-
 </body>
 </html>

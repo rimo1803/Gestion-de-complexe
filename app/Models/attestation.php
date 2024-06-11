@@ -10,7 +10,7 @@ class Attestation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'description', 'type_attestation', 'date_edition', 'reference', 'personnel_id'
+        'description', 'type_attestation', 'date_edition', 'reference', 'personnel_id', 'document'
     ];
 
     public function travail()

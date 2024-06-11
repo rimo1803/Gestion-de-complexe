@@ -21,38 +21,37 @@ use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class PersonnelController extends Controller
+{ public function acceuil(){
+    return view('layouts.main');
+}
+
+public function create()
 {
-    public function acceuil(){
-        return view('layouts.main');
-    }
-    public function create()
-    {
-        return view('Accueil_directeur.create');
+    return view('Accueil_directeur.create');
+}
 
-    }
+public function store(Request $request)
+{
+    Log::info('Début de la méthode store du PersonnelController.');
 
-    public function store(Request $request)
-    {
-        Log::info('Début de la méthode store du PersonnelController.');
+    $validated = $request->validate([
+        'Nomper' => ['required'],
+        'prenomper' => ['required'],
+        'email' => ['required', 'email', 'unique:personnels,email'],
+        'password' => ['required', 'confirmed'],
+        'immat' => ['required', 'unique:personnels,immat'],
+        'date_naissance' => ['required', 'date'],
+        'grade' => ['required'],
+        'CIN' => ['required', 'unique:personnels,CIN'],
+        'date_affectation' => ['required', 'date'],
+        'diplome' => ['required'],
+        'lieu_naissance' => ['required'],
+        'photo_profil' => ['required', 'file'],
+        'role' => ['required', Rule::in(['personnel', 'directeur'])],
+        'status' => ['required'],
+    ]);
 
-        $validated = $request->validate([
-            'Nomper' => ['required'],
-            'prenomper' => ['required'],
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-            'immat' => ['required'],
-            'date_naissance' => ['required', 'date'],
-            'grade' => ['required'],
-            'CIN' => ['required'],
-            'date_affectation' => ['required', 'date'],
-            'diplome' => ['required'],
-            'lieu_naissance' => ['required'],
-            'photo_profil' => ['required', 'file'],
-            'role' => ['required', Rule::in(['personnel', 'directeur'])],
-            'status' => ['required'],  // Ajout de la validation pour le champ status
-        ]);
-
-        Log::info('Validation des champs réussie.');
+    Log::info('Validation des champs réussie.');
 
     try {
         $personnel = new Personnel();
@@ -67,20 +66,20 @@ class PersonnelController extends Controller
         $personnel->date_affectation = $request->date_affectation;
         $personnel->diplome = $request->diplome;
         $personnel->lieu_naissance = $request->lieu_naissance;
-        $personnel->role_id = $request->role_id;
+        $personnel->role = $request->role;
         $personnel->status = $request->status;
 
-            // Gestion du téléchargement de la photo de profil
-            if ($request->hasFile('photo_profil')) {
-                $profile_picture = $request->file('photo_profil');
-                $profile_picture_name = time() . '_' . $profile_picture->getClientOriginalName();
-                $profile_picture->move(public_path('profile_pictures'), $profile_picture_name);
-                $personnel->photo_profil = $profile_picture_name;
-                Log::info('Téléchargement de la photo de profil réussi.');
-            }
+        // Gestion du téléchargement de la photo de profil
+        if ($request->hasFile('photo_profil')) {
+            $profile_picture = $request->file('photo_profil');
+            $profile_picture_name = time() . '_' . $profile_picture->getClientOriginalName();
+            $profile_picture->move(public_path('profile_pictures'), $profile_picture_name);
+            $personnel->photo_profil = $profile_picture_name;
+            Log::info('Téléchargement de la photo de profil réussi.');
+        }
 
-            $personnel->save();
-            Log::info('Personnel créé avec succès.');
+        $personnel->save();
+        Log::info('Personnel créé avec succès.');
 
         return redirect('/')->with('success', 'Personnel créé avec succès');
     } catch (\Exception $e) {

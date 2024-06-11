@@ -103,50 +103,9 @@
                     </div>
                 </li>
                 <!-- /Search -->
-               <!-- Notifications -->
-               @if (isset($directeurNotifications) && $directeurNotifications->isNotEmpty())
-<li class="nav-item dropdown">
-    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-        <i class="fa fa-bell-o"></i>
-        <span class="badge badge-pill">{{ $directeurNotifications->count() }}</span> <!-- Nombre de notifications -->
-    </a>
-    <div class="dropdown-menu notifications">
-        <div class="topnav-dropdown-header">
-            <span class="notification-title">Notifications</span>
-            <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
-        </div>
-        <div class="topnav-dropdown-footer">
-            <!-- Boucle sur les deux premières notifications -->
-            @foreach ($directeurNotifications as $notification)
-                <a href="{{ route('viewNotification', ['id' => $notification->id]) }}" class="notification-item">
-                    <div class="notification-content">
-                        <span class="notification-text">{{ $notification->data['message'] }}</span>
-                        <span class="notification-time">{{ $notification->created_at->diffForHumans() }}</span>
-                    </div>
-                </a>
-            @endforeach
-            <!-- Fin de la boucle -->
-            @if ($directeurNotifications->count() > 2)
-                <a href="{{ route('allNotifications') }}" class="view-all">Voir toutes les notifications</a>
-            @endif
-        </div>
-    </div>
-</li>
-@endif
-<!-- /Notifications -->
 
-                <!-- Message Notifications -->
-                <li class="nav-item dropdown">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <i class="fa fa-comment-o"></i> <span class="badge badge-pill">8</span>
-                    </a>
-                    <div class="dropdown-menu notifications">
-                        <div class="topnav-dropdown-header">
-                            <span class="notification-title">Messages</span>
-                            <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
-                        </div>
-                </li>
-                <!-- /Message Notifications -->
+
+
                 <li class="nav-item dropdown has-arrow main-drop">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <span class="user-img">

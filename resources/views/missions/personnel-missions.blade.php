@@ -10,16 +10,16 @@
 </style>
 
     <div class="container">
-        <h1>Vos Missions</h1>
+        <h1 style="align-items: center">Mes Missions</h1>
         <ul class="list-group">
             @foreach ($missions as $mission)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     {{ $mission->destination }}
                     <div class="btn-group" role="group" aria-label="Actions">
-                        <a href="{{ route('missions.fillTransportForm', $mission->id) }}" class="btn btn-primary">
+                        <a href="{{ route('missions.fillTransportForm', $mission->id) }}" class="btn btn-primary" >
                             <i class="fas fa-truck"></i> Remplir le formulaire de transport
                         </a>
-                        <a href="{{ route('missions.downloadMissionOrder', $mission->id) }}" class="btn btn-success">
+                        <a href="{{ route('missions.downloadMissionOrder', $mission->id) }}" class="btn btn-success" style="background-color: green">
                             <i class="fas fa-download"></i> Télécharger l'ordre de mission
                         </a>
                     </div>

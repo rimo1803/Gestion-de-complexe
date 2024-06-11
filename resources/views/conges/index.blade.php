@@ -25,6 +25,7 @@
             max-width: 800px;
             margin: 20px auto;
             padding: 75px;
+            padding-top: 85px;
             background-color: #fff;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -57,7 +58,7 @@
         }
 
         .table th {
-            background-color: #f2f2f2;
+            background-color: #125715;
         }
 
         .btn {
@@ -104,7 +105,7 @@
         }
 
         .modal-header {
-            background-color: #007bff;
+            background-color: #258508;
             color: #fff;
             border-radius: 5px 5px 0 0;
         }
@@ -137,13 +138,14 @@
             align-content: center;
             align-items: center;
         }
+
         </style>
     </head>
 <body>
 
     <div class="container">
         <h1>Mes Congés</h1>
-        <a href="{{ route('conges.create') }}">Créer une demande de congé</a>
+        <a href="{{ route('conges.create') }}" style="color: #125715">Créer une demande de congé</a>
 
         <table class="table">
             <thead>
@@ -162,7 +164,7 @@
                     <td>{{ $conge->status }}</td>
                     <td>
                         @if ($conge->status == 'en attente')
-                        <a href="#" class="btn btn-primary edit-conge" data-conge-id="{{ $conge->id }}" data-toggle="modal" data-target="#editStudentModal{{$conge->id}}">Modifier</a>
+                        <a href="#" class="btn btn-primary edit-conge" style="background-color: #218838" data-conge-id="{{ $conge->id }}" data-toggle="modal" data-target="#editStudentModal{{$conge->id}}">Modifier</a>
 
                         <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $conge->id }}">Supprimer</a>
                     @elseif ($conge->status == 'acceptée' && $conge->decision_conge)
@@ -234,7 +236,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Changes</button>
+                        <button type="submit" class="btn btn-primary" style="background-color: #125715"><i class="fas fa-save"></i> Save Changes</button>
                     </div>
                 </form>
             </div>

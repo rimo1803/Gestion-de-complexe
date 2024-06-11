@@ -11,7 +11,6 @@
                         <p>Prénom : {{ Auth::user()->prenomper }}</p>
                         <p>Email : {{ Auth::user()->email }}</p>
                         <p>CIN : {{ Auth::user()->CIN }}</p>
-                        <!-- Ajoutez d'autres informations personnelles ici -->
 
                         <form method="POST" action="{{ route('demande.conge.submit') }}">
                             @csrf
