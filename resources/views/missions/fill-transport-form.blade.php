@@ -1,18 +1,23 @@
+
+@extends('layouts.main')
+
+@section('content')
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <style>
 .container{
-    padding: 150px;
+    padding-left: 120px;
+    padding-top: 90px;
 
 }
 </style>
-@extends('layouts.main')
 
-@section('content')
     <div class="container">
+        <h1>Remplir le formulaire de moyen de transport</h1>
         <div class="row">
-            <div class="col-md-6">
-                <h1>Remplir le formulaire de moyen de transport</h1>
+            <div class="col-md-4">
+
                 <form action="{{ route('missions.storeTransportForm', $mission->id) }}" method="POST">
                     @csrf
                     <div class="mb-3">

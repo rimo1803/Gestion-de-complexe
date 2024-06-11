@@ -123,7 +123,7 @@ h1 {
 </head>
 <body>
 
-    @extends('layouts.master')
+    @extends('layouts.main')
 
     @section('content')
 
@@ -196,7 +196,7 @@ h1 {
                 </div>
 
                 <div class="form-group">
-                    <label for="role">Rôle:</label>
+                    <label for="role">Role</label>
                     <input type="text" name="role" class="form-control" value="{{ $personnel->role }}" disabled>
                 </div>
 

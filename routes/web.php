@@ -9,6 +9,8 @@ use App\Http\Controllers\DirecteurController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\AttestationController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\MissionController;
+use App\Http\Controllers\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,21 +73,26 @@ Route::middleware(['auth', 'role:directeur'])->group(function () {
 });
 
 
-Route::middleware(['auth','role:directeur'])->group(function () {
-    Route::resource('conges', CongeController::class)->except(['show']);
+Route::middleware(['auth'])->group(function () {
+    Route::resource('conges', CongeController::class)->names('conges');
+    Route::get('conges/{conge}', [CongeController::class, 'show'])->name('conges.show');
+
     Route::post('conges/{conge}/decision', [CongeController::class, 'decision'])->name('conges.decision');
     Route::get('conges/{conge}/download', [CongeController::class, 'downloadDecision'])->name('conges.download');
     Route::get('conges/pending', [CongeController::class, 'showPendingRequests'])->name('conges.pending');
-   Route::post('/conges/edit/{id}', [CongeController::class, 'update'])->name('update');
-   Route::put('/conges/{conge}', 'App\Http\Controllers\CongeController@update')->name('conges.update');
-   Route::prefix('missions')->name('missions.')->group(function () {
-    Route::get('/', [MissionController::class, 'index'])->name('index');
-    Route::get('/create', [MissionController::class, 'create'])->name('create');
-    Route::post('/', [MissionController::class, 'store'])->name('store');
-    Route::get('/{mission}/edit', [MissionController::class, 'edit'])->name('edit');
-    Route::put('/{mission}', [MissionController::class, 'update'])->name('update');
-    Route::get('/{mission}/download-pdf', [MissionController::class, 'downloadPDF'])->name('downloadPDF');
-}) ;});
+    Route::post('/conges/edit/{id}', [CongeController::class, 'update'])->name('conges.update');
+    Route::put('/conges/{conge}', 'App\Http\Controllers\CongeController@update')->name('conges.update');
+
+    Route::prefix('missions')->name('missions.')->group(function () {
+        Route::get('/', [MissionController::class, 'index'])->name('index');
+        Route::get('/create', [MissionController::class, 'create'])->name('create');
+        Route::post('/', [MissionController::class, 'store'])->name('store');
+        Route::get('/{mission}/edit', [MissionController::class, 'edit'])->name('edit');
+        Route::put('/{mission}', [MissionController::class, 'update'])->name('update');
+        Route::get('/{mission}/download-pdf', [MissionController::class, 'downloadPDF'])->name('downloadPDF');
+    });
+});
+
 
 
 Route::middleware(['auth'])->group(function () {
@@ -118,3 +125,12 @@ Route::get('/generate-pdf', [PDFController::class, 'generatePDF'])->name('pdf');
 Route::get('/export', [PersonnelController::class, 'export'])->name('export');
 
 
+
+
+Route::middleware(['auth'])->group(function () {
+    // Afficher le formulaire de modification du mot de passe
+    Route::get('/password/change', [PasswordController::class, 'showChangePasswordForm'])->name('password.change');
+
+    // Traiter la demande de modification du mot de passe
+    Route::post('/password/change', [PasswordController::class, 'changePassword'])->name('password.update');
+});

@@ -165,7 +165,7 @@
                         <span>{{ Session::get('name') }}</span>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="">Profile</a>
+                        <a class="dropdown-item" href="{{route('profile.show')}}">Profile</a>
                         <a class="dropdown-item" href="{{route('logout')}}">Deconexion</a>
                     </div>
                 </li>
@@ -178,7 +178,7 @@
                     <i class="fa fa-ellipsis-v"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="">Profile</a>
+                    <a class="dropdown-item" href="{{route('profile.show')}}">Profile</a>
                     <a class="dropdown-item" href="">Deconnexion</a>
                 </div>
             </div>
