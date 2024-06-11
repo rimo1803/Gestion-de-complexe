@@ -11,11 +11,11 @@ use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\AttestationController;
 use App\Http\Controllers\AttestationTravailController;
 use App\Http\Controllers\NotificationController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\PasswordController;
-=======
+
 use App\Models\AttestationTravail;
->>>>>>> hafsa
+
 
 /*
 |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ Route::middleware(['auth', 'role:directeur'])->group(function () {
     Route::get('/attestation/{id}/refuse', [AttestationController::class, 'refuseAttestation'])->name('attestation.refuse');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
-<<<<<<< HEAD
+
 
 
 Route::middleware(['auth'])->group(function () {
@@ -126,15 +126,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-
-
-
-
-
-
-
-=======
->>>>>>> hafsa
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 });
@@ -146,8 +137,6 @@ Route::get('/export', [PersonnelController::class, 'export'])->name('export');
 
 
 
-<<<<<<< HEAD
-
 Route::middleware(['auth'])->group(function () {
     // Afficher le formulaire de modification du mot de passe
     Route::get('/password/change', [PasswordController::class, 'showChangePasswordForm'])->name('password.change');
@@ -155,5 +144,4 @@ Route::middleware(['auth'])->group(function () {
     // Traiter la demande de modification du mot de passe
     Route::post('/password/change', [PasswordController::class, 'changePassword'])->name('password.update');
 });
-=======
->>>>>>> hafsa
+
